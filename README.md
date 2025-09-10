@@ -1,2 +1,4 @@
 # Validacion y Pruebas
-Práctica 0 de la asignatura de Validación y pruebas
+Práctiacas de la asignatura de Validación y Pruebas
+
+Realizado entre Pablo Maté Gómez y Diego Alonso Soria
