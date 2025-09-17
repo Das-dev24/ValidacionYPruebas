@@ -1,18 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\pmate\\Desktop\\Universidad\\4\u00BA de Carrera\\Primer Cuatrimestre\\Validacion y pruebas\\Practicas\\Practica_0\\",
+  "WorkspaceRootPath": "C:\\Users\\dalon\\source\\repos\\ValidacionYPruebas\\Practica_0\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{344B9839-203B-4503-8882-4927BB8F3A77}|Practica_0\\Proyecto.csproj|c:\\users\\pmate\\desktop\\universidad\\4\u00BA de carrera\\primer cuatrimestre\\validacion y pruebas\\practicas\\practica_0\\practica_0\\documentacion\\classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
-      "RelativeMoniker": "D:0:0:{344B9839-203B-4503-8882-4927BB8F3A77}|Practica_0\\Proyecto.csproj|solutionrelative:practica_0\\documentacion\\classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{344B9839-203B-4503-8882-4927BB8F3A77}|Practica_0\\Proyecto.csproj|c:\\users\\pmate\\desktop\\universidad\\4\u00BA de carrera\\primer cuatrimestre\\validacion y pruebas\\practicas\\practica_0\\practica_0\\utils\\validar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{344B9839-203B-4503-8882-4927BB8F3A77}|Practica_0\\Proyecto.csproj|c:\\users\\dalon\\source\\repos\\validacionypruebas\\practica_0\\practica_0\\utils\\validar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{344B9839-203B-4503-8882-4927BB8F3A77}|Practica_0\\Proyecto.csproj|solutionrelative:practica_0\\utils\\validar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0E2E4DF6-30D6-47AE-91AE-3CD5DEC0EB03}|ProyectoTests\\ProyectoTests.csproj|C:\\Users\\pmate\\Desktop\\Universidad\\4\u00BA de Carrera\\Primer Cuatrimestre\\Validacion y pruebas\\Practicas\\Practica_0\\proyectotests\\utils\\validartests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0E2E4DF6-30D6-47AE-91AE-3CD5DEC0EB03}|ProyectoTests\\ProyectoTests.csproj|C:\\Users\\dalon\\source\\repos\\ValidacionYPruebas\\Practica_0\\proyectotests\\utils\\validartests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0E2E4DF6-30D6-47AE-91AE-3CD5DEC0EB03}|ProyectoTests\\ProyectoTests.csproj|solutionrelative:proyectotests\\utils\\validartests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{344B9839-203B-4503-8882-4927BB8F3A77}|Practica_0\\Proyecto.csproj|C:\\Users\\dalon\\source\\repos\\ValidacionYPruebas\\Practica_0\\practica_0\\documentacion\\classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
+      "RelativeMoniker": "D:0:0:{344B9839-203B-4503-8882-4927BB8F3A77}|Practica_0\\Proyecto.csproj|solutionrelative:practica_0\\documentacion\\classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,50 +22,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Validar.cs",
+              "DocumentMoniker": "C:\\Users\\dalon\\source\\repos\\ValidacionYPruebas\\Practica_0\\Practica_0\\utils\\Validar.cs",
+              "RelativeDocumentMoniker": "Practica_0\\utils\\Validar.cs",
+              "ToolTip": "C:\\Users\\dalon\\source\\repos\\ValidacionYPruebas\\Practica_0\\Practica_0\\utils\\Validar.cs",
+              "RelativeToolTip": "Practica_0\\utils\\Validar.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T16:07:19.815Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ClassDiagram1.cd",
-              "DocumentMoniker": "C:\\Users\\pmate\\Desktop\\Universidad\\4\u00BA de Carrera\\Primer Cuatrimestre\\Validacion y pruebas\\Practicas\\Practica_0\\Practica_0\\documentacion\\ClassDiagram1.cd",
-              "RelativeDocumentMoniker": "Practica_0\\documentacion\\ClassDiagram1.cd",
-              "ToolTip": "C:\\Users\\pmate\\Desktop\\Universidad\\4\u00BA de Carrera\\Primer Cuatrimestre\\Validacion y pruebas\\Practicas\\Practica_0\\Practica_0\\documentacion\\ClassDiagram1.cd",
-              "RelativeToolTip": "Practica_0\\documentacion\\ClassDiagram1.cd",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
-              "WhenOpened": "2025-09-10T20:34:33.301Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Validar.cs",
-              "DocumentMoniker": "C:\\Users\\pmate\\Desktop\\Universidad\\4\u00BA de Carrera\\Primer Cuatrimestre\\Validacion y pruebas\\Practicas\\Practica_0\\Practica_0\\utils\\Validar.cs",
-              "RelativeDocumentMoniker": "Practica_0\\utils\\Validar.cs",
-              "ToolTip": "C:\\Users\\pmate\\Desktop\\Universidad\\4\u00BA de Carrera\\Primer Cuatrimestre\\Validacion y pruebas\\Practicas\\Practica_0\\Practica_0\\utils\\Validar.cs",
-              "RelativeToolTip": "Practica_0\\utils\\Validar.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T16:07:19.815Z",
-              "EditorCaption": ""
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ClassDiagram1.cd",
+              "DocumentMoniker": "C:\\Users\\dalon\\source\\repos\\ValidacionYPruebas\\Practica_0\\Practica_0\\documentacion\\ClassDiagram1.cd",
+              "RelativeDocumentMoniker": "Practica_0\\documentacion\\ClassDiagram1.cd",
+              "ToolTip": "C:\\Users\\dalon\\source\\repos\\ValidacionYPruebas\\Practica_0\\Practica_0\\documentacion\\ClassDiagram1.cd",
+              "RelativeToolTip": "Practica_0\\documentacion\\ClassDiagram1.cd",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
+              "WhenOpened": "2025-09-10T20:34:33.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ValidarTests.cs",
-              "DocumentMoniker": "C:\\Users\\pmate\\Desktop\\Universidad\\4\u00BA de Carrera\\Primer Cuatrimestre\\Validacion y pruebas\\Practicas\\Practica_0\\ProyectoTests\\utils\\ValidarTests.cs",
+              "DocumentMoniker": "C:\\Users\\dalon\\source\\repos\\ValidacionYPruebas\\Practica_0\\ProyectoTests\\utils\\ValidarTests.cs",
               "RelativeDocumentMoniker": "ProyectoTests\\utils\\ValidarTests.cs",
-              "ToolTip": "C:\\Users\\pmate\\Desktop\\Universidad\\4\u00BA de Carrera\\Primer Cuatrimestre\\Validacion y pruebas\\Practicas\\Practica_0\\ProyectoTests\\utils\\ValidarTests.cs",
+              "ToolTip": "C:\\Users\\dalon\\source\\repos\\ValidacionYPruebas\\Practica_0\\ProyectoTests\\utils\\ValidarTests.cs",
               "RelativeToolTip": "ProyectoTests\\utils\\ValidarTests.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAhwBYAAABJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-10T16:07:14.085Z"
             }
