@@ -14,7 +14,7 @@ namespace Practica_0.utils.Tests
         [TestMethod()]
         public void NIFTest()
         {
-            Assert.IsTrue(Validar.NIF("71706830Y"));
+            Assert.IsTrue(Validar.NIF("71706830E"));
             Assert.IsFalse(Validar.NIF("71706830E"));
         }
 
