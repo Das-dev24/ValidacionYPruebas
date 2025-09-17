@@ -65,17 +65,18 @@ namespace Practica_1.Model.Tests
             bool loginFail_IncorrectPassword = user.Login(email, "wrong_password");
             bool loginFail_IncorrectEmail = user.Login("wrong@example.com", password);
             bool loginFail_NullPassword = user.Login(email, null);
+            bool loginFail_NullEmail = user.Login(null, password);
 
             // Assert
             Assert.IsTrue(loginSuccess, "El login debería ser exitoso con credenciales correctas.");
             Assert.IsFalse(loginFail_IncorrectPassword, "El login debería fallar con una contraseña incorrecta.");
             Assert.IsFalse(loginFail_IncorrectEmail, "El login debería fallar con un email incorrecto.");
             Assert.IsFalse(loginFail_NullPassword, "El login debería fallar con una contraseña nula.");
+            Assert.IsFalse(loginFail_NullEmail, "El login debería fallar con un email nulo.");
         }
 
         [TestMethod()]
-        public void ChangePasswordTest()
-        {
+        public void ChangePasswordTest() {
             // Arrange
             string email = "change@example.com";
             string initialPassword = "oldPassword123";
@@ -85,11 +86,13 @@ namespace Practica_1.Model.Tests
             // Act
             bool changeSuccess = user.ChangePassword(initialPassword, newPassword);
             bool changeFail = user.ChangePassword("wrongPassword", newPassword);
+            bool changeFail2 = user.ChangePassword("", newPassword);
 
             // Assert
             Assert.IsTrue(changeSuccess, "El cambio de contraseña debería ser exitoso.");
             Assert.IsTrue(user.Login(email, newPassword), "El usuario debería poder iniciar sesión con la nueva contraseña.");
             Assert.IsFalse(changeFail, "El cambio de contraseña debería fallar con la contraseña actual incorrecta.");
+           Assert.IsFalse(changeFail2, "El cambio de contraseña debería fallar si no se introduce contraseña o se introduce en blanco.");
             Assert.IsFalse(user.Login(email, initialPassword), "El usuario no debería poder iniciar sesión con la contraseña anterior.");
         }
 

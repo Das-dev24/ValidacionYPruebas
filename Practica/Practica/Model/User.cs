@@ -52,25 +52,29 @@ namespace Practica_1.Model {
         public bool Is_active { get { return this.is_active; } set { this.is_active = value; } }
         public DateTime Last_login { get { return this.last_login; } set { this.last_login = value; } }
 
-        public bool Login (String email, String password){
-            if (email == null | password == null){
-                return false;
-            } else if (Utils.Password.VerifyPassword(password, this.password) && Email.Equals(email)){
-                return true;
-            } else {
+        public bool Login(string email, string password) {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
                 return false;
             }
+
+            if (Utils.Password.VerifyPassword(password, this.password) && this.Email.Equals(email)) {
+                return true;
+            }
+
+            return false;
         }
 
-        public bool ChangePassword (String exist_password, String new_password){
-            if (exist_password == null | new_password == null){
-                return false;
-            } else if (Utils.Password.VerifyPassword(exist_password, this.password)){
-                Password = new_password;
-                return true; 
-            } else {
+        public bool ChangePassword(string existingPassword, string newPassword) {
+            if (string.IsNullOrEmpty(existingPassword) || string.IsNullOrEmpty(newPassword)){
                 return false;
             }
+            
+            if (!Utils.Password.VerifyPassword(existingPassword, this.password)){
+                return false;
+            }
+
+            Password = newPassword;
+            return true;
         }
 
         public override bool Equals(object obj) {
