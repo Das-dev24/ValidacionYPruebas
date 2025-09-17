@@ -6,10 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Practica_1.Utils;
 
-namespace Practica_1.Model
-{
-    public class User
-    {
+namespace Practica_1.Model {
+    public class User {
         private int id;
         private string name;
         private string lastName;
@@ -20,16 +18,16 @@ namespace Practica_1.Model
         private bool is_active;
         private DateTime last_login;
 
-        public User(int id, string name, string lastName, string email, string password, bool subscription, bool is_superuser, bool is_active, DateTime last_login) {
-            this.id = id;
+        public User(string name, string lastName, string email, string password) {
+            this.id = 1;
             this.name = name;
             this.lastName = lastName;
             this.email = email;
-            this.password = password;
-            this.subscription = subscription;
-            this.is_superuser = is_superuser;
-            this.is_active = is_active;
-            this.last_login = last_login;
+            this.password = Utils.Password.EncriptPassword(password); ;
+            this.subscription = false;
+            this.is_superuser = false;
+            this.is_active = false;
+            this.last_login = DateTime.Now;
         }
 
         public User() {
@@ -45,21 +43,13 @@ namespace Practica_1.Model
         }
 
         public int Id { get { return this.id; } set { this.id = value; } }
-
         public String Name { get { return this.name; } set { this.name = value;  } }
-
         public String LastName { get { return this.lastName; } set { this.lastName = value; } }
-
         public String Email { get { return this.email; } set { this.email = value; } }
-
-        public String Password { get { return this.password; } set { this.password = Utils.Password.EncriptPassword(value); } }
-
+        public String Password { set { this.password = Utils.Password.EncriptPassword(value); } }
         public bool Subscription { get { return this.subscription; } set { this.subscription = value; } }
-
         public bool Is_superuser { get { return this.is_superuser; } set { this.is_superuser = value; } }
-
         public bool Is_active { get { return this.is_active; } set { this.is_active = value; } }
-
         public DateTime Last_login { get { return this.last_login; } set { this.last_login = value; } }
 
         public bool Login (String email, String password){
@@ -98,7 +88,6 @@ namespace Practica_1.Model
                    Name == user.Name &&
                    LastName == user.LastName &&
                    Email == user.Email &&
-                   Password == user.Password &&
                    Subscription == user.Subscription &&
                    Is_superuser == user.Is_superuser &&
                    Is_active == user.Is_active &&
@@ -106,7 +95,7 @@ namespace Practica_1.Model
         }
 
         public override int GetHashCode() {
-            int hashCode = -1904359416;
+            int hashCode = 58874072;
             hashCode = hashCode * -1521134295 + id.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(lastName);
@@ -120,7 +109,6 @@ namespace Practica_1.Model
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Password);
             hashCode = hashCode * -1521134295 + Subscription.GetHashCode();
             hashCode = hashCode * -1521134295 + Is_superuser.GetHashCode();
             hashCode = hashCode * -1521134295 + Is_active.GetHashCode();
