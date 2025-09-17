@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Practica_1.Utils;
 
 namespace Practica_1.Model
 {
@@ -32,7 +33,7 @@ namespace Practica_1.Model
 
         public String LastName { get { return this.lastName; } set { this.lastName = value; } }
 
-        public String Password { set { this.password = Utilities.EncriptPassword(value); } }
+        public String Password { set { this.password = EncriptPassword.EncriptPasswordMethod(value); } }
 
         public override bool Equals(object obj)
         {

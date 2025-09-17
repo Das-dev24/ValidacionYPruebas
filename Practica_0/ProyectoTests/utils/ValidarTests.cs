@@ -19,7 +19,8 @@ namespace Practica_0.utils.Tests
         }
 
         [TestMethod()]
-        public void IBANTest(){
+        public void IBANTest()
+        {
             Assert.IsTrue(Validar.IBAN("ES91 2100 0418 4502 0005 1332"));
         }
     }
