@@ -10,12 +10,12 @@ namespace Practica.Model
 {
     public class ActivityRunning: Activity
     {
-        private int distance;
+        private float distance;
         private int slope; //Desnivel
         private string place;
        
 
-        public ActivityRunning(int idActivivty, int user, string name, string typeActivity, DateTime start, int duration, string notes, string place, int distance, int slope) 
+        public ActivityRunning(int idActivivty, int user, string name, string typeActivity, DateTime start, int duration, string notes, string place, float distance, int slope) 
             : base(idActivivty, user, name, typeActivity, start, duration, notes)
         {
             base.TypeActivity = "Carrera";
@@ -27,9 +27,10 @@ namespace Practica.Model
         {
             return "Carrera en " + this.place + " de " + this.distance + " a un ritmo de: " + this.Rythm() + " mins/km";
         }
-        public int Rythm()
+        public string Rythm()
         {
-            return base.Duration / this.distance;
+            float rythm = base.Duration / this.distance;
+            return rythm.ToString("0.00");
         }
     }
 }

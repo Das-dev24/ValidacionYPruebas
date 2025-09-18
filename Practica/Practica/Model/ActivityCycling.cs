@@ -8,14 +8,14 @@ using Practica_1.Model;
 namespace Practica.Model
 
 {
-    public class ActividadCiclismo : Activity
+    public class ActividadCycling : Activity
     {
-        private int distance;
+        private float distance;
         private int slope; //Desnivel
         private string place;
 
 
-        public ActividadCiclismo(int idActivivty, int user, string name, string typeActivity, DateTime start, int duration, string notes, string place, int distance, int slope)
+        public ActividadCycling(int idActivivty, int user, string name, string typeActivity, DateTime start, int duration, string notes, string place, float distance, int slope)
             : base(idActivivty, user, name, typeActivity, start, duration, notes)
         {
             base.TypeActivity = "Ciclismo";
@@ -23,17 +23,22 @@ namespace Practica.Model
             this.distance = distance;
             this.slope = slope;
         }
+
+
+
         public override string ObtainActivity()
         {
-            return "Ciclismo en " + this.place + " de " + this.distance + " a un ritmo de: " + this.Rythm() + " mins/km." + "Y una velocidad media de :" + this.Speed() + " km/h";
+            return "Ciclismo en " + this.place + " de " + this.distance + " a un ritmo de: " + this.Rythm() + " mins/km. Y una velocidad media de: " + this.Speed() + " km/h, y un desnivel de " + this.slope;
         }
-        public int Rythm()
+        public string Rythm()
         {
-            return base.Duration / this.distance;
+            float rythm = base.Duration / this.distance;
+            return rythm.ToString("0.00");
         }
-        public int Speed()
+        public string Speed()
         {
-            return this.distance / (base.Duration / 60);
+            float speed = this.distance / (base.Duration / 60);
+            return speed.ToString("0.00");
         }
     }
 }
