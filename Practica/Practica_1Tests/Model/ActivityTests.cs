@@ -11,7 +11,8 @@ namespace Practica.Model.Tests
 { 
 [TestClass]
 public class ActivityTests
-{
+{           
+            //Ahora dan un coverage del 100% con estos tests
             // --- TEST PARA LA LÓGICA COMÚN (a través de RunningActivity) ---
             [TestMethod]
             public void Constructor_InitializesBaseProperties_Correctly()
