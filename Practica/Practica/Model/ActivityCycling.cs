@@ -51,10 +51,6 @@ namespace Practica.Model
         }
         public string Speed()
         {
-            if (base.Duration == 0)
-            {
-                throw new DivideByZeroException("La duración no puede ser cero al calcular la velocidad.");
-            } 
             float speed = this.distance / (base.Duration / 60f);
             return speed.ToString("0.00");
         }

@@ -27,8 +27,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivityRunning(testId, testUserId, testName, "", testDate, 60, "", "Parque", -10f, 150);
-            }, "Debería lanzar ArgumentException para distancia negativa.");
+                new ActivityRunning(testId, testUserId, testName, "", testDate, 60, "", "Parque", -10f, 150);}, "Debería lanzar ArgumentException para distancia negativa.");
         }
 
         [TestMethod]
@@ -36,8 +35,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivityRunning(testId, testUserId, testName, "", testDate, 0, "", "Parque", 10f, 150);
-            }, "Debería lanzar ArgumentException para duración cero.");
+                new ActivityRunning(testId, testUserId, testName, "", testDate, 0, "", "Parque", 10f, 150); }, "Debería lanzar ArgumentException para duración cero.");
         }
 
         [TestMethod]
@@ -45,8 +43,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivityRunning(testId, testUserId, testName, "", testDate, -60, "", "Parque", 10f, 150);
-            }, "Debería lanzar ArgumentException para duración negativa.");
+                new ActivityRunning(testId, testUserId, testName, "", testDate, -60, "", "Parque", 10f, 150); }, "Debería lanzar ArgumentException para duración negativa.");
         }
 
         [TestMethod]
@@ -90,8 +87,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivitySwimming(testId, testUserId, testName, "", testDate, 45, "", "Piscina", -1500);
-            }, "Debería lanzar ArgumentException para distancia negativa.");
+                new ActivitySwimming(testId, testUserId, testName, "", testDate, 45, "", "Piscina", -1500);}, "Debería lanzar ArgumentException para distancia negativa.");
         }
 
         // --- TEST AÑADIDO ---
@@ -100,8 +96,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivitySwimming(testId, testUserId, testName, "", testDate, 0, "", "Piscina", 1500);
-            }, "Debería lanzar ArgumentException para duración cero.");
+                new ActivitySwimming(testId, testUserId, testName, "", testDate, 0, "", "Piscina", 1500); }, "Debería lanzar ArgumentException para duración cero.");
         }
 
         // --- TEST AÑADIDO ---
@@ -110,8 +105,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivitySwimming(testId, testUserId, testName, "", testDate, -45, "", "Piscina", 1500);
-            }, "Debería lanzar ArgumentException para duración negativa.");
+                new ActivitySwimming(testId, testUserId, testName, "", testDate, -45, "", "Piscina", 1500); }, "Debería lanzar ArgumentException para duración negativa.");
         }
 
         [TestMethod]
@@ -139,8 +133,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActividadCycling(testId, testUserId, testName, "", testDate, 120, "", "Puerto", -50f, 800);
-            }, "Debería lanzar ArgumentException para distancia negativa.");
+                new ActividadCycling(testId, testUserId, testName, "", testDate, 120, "", "Puerto", -50f, 800); }, "Debería lanzar ArgumentException para distancia negativa.");
         }
 
         // --- TEST AÑADIDO ---
@@ -149,8 +142,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActividadCycling(testId, testUserId, testName, "", testDate, 0, "", "Puerto", 50f, 800);
-            }, "Debería lanzar ArgumentException para duración cero.");
+                new ActividadCycling(testId, testUserId, testName, "", testDate, 0, "", "Puerto", 50f, 800); }, "Debería lanzar ArgumentException para duración cero.");
         }
 
         // --- TEST AÑADIDO ---
@@ -159,8 +151,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActividadCycling(testId, testUserId, testName, "", testDate, -120, "", "Puerto", 50f, 800);
-            }, "Debería lanzar ArgumentException para duración negativa.");
+                new ActividadCycling(testId, testUserId, testName, "", testDate, -120, "", "Puerto", 50f, 800); }, "Debería lanzar ArgumentException para duración negativa.");
         }
 
         [TestMethod]
@@ -184,11 +175,6 @@ namespace Practica.Model.Tests
             Assert.ThrowsException<DivideByZeroException>(() => activity.Rythm());
         }
 
-        public void ActividadCycling_Rythm_Zero_ThrowsDivideByZeroException()
-        {
-            var activity = new ActividadCycling(testId, testUserId, testName, "", testDate, 0, "", "Puerto", 40f, 800);
-            Assert.ThrowsException<DivideByZeroException>(() => activity.Rythm());
-        }
 
         [TestMethod]
         public void ActividadCycling_ObtainActivity_ReturnsCorrectFormat()
