@@ -10,6 +10,7 @@ namespace Practica.Model {
 
     public enum UserState { Active, Unactive, Blocked };
 
+    // Mirar a futuro Notificación de Cambios (implementar la interfaz INotifyPropertyChanged)
     public class User {
 
         public int Id { get; set; }
@@ -17,7 +18,7 @@ namespace Practica.Model {
         public string LastName { get; set; }
         public string Email { get; set; }
         private string password;
-        public string Password { set { this.password = Utils.Password.EncriptPassword(value); } }
+        public string Password { get { return this.password; } set { this.password = Utils.Password.EncriptPassword(value); } }
         public bool Is_Subscription { get; set; }
         public bool Is_superuser { get; set; }
         public bool Is_active { get; set; }
@@ -40,7 +41,7 @@ namespace Practica.Model {
         public User() {
             this.Id = 1;
             this.Name = "Admin";
-            this.LastName = "";
+            this.LastName = "Admin";
             this.Email = "example@example.com";
             this.Password = "Admin_123456";
             this.Is_Subscription = false;
@@ -50,78 +51,75 @@ namespace Practica.Model {
             this.Last_login = DateTime.Now;
         }
 
-        public bool Register(string name, string lastName, string email, string password) {
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) ) { 
-                return false;
+        public void Register(string name, string lastName, string email, string password) {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
+                throw new ArgumentNullException("All fields must be filled out for registration.");
             }
-            if (!Utils.Password.CheckPassword(password) || email != Email) {
-                //Modificar luego el tema del email para comparar con la bd
-                return false;
+            if (!Utils.Password.CheckPassword(password) || email == Email) {
+                // Modificar luego el tema del email para comparar con la bd
+                throw new ArgumentException("Password does not meet requirements or email is invalid.");
             }
 
             Name = name;
             LastName = lastName;
             Email = email;
             Password = password;
-
-            return true;
         }
 
-        public bool Login(string email, string password) {
+        public void Login(string email, string password) {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
-                return false;
+                throw new ArgumentNullException("Email and password cannot be empty.");
             }
 
-            if (Utils.Password.VerifyPassword(password, this.password) && this.Email.Equals(email)) {
-                this.State = UserState.Active;
-                this.Last_login = DateTime.Now;
-                return true;
+            if (!Utils.Password.VerifyPassword(password, this.password) || !this.Email.Equals(email)) {
+                throw new InvalidOperationException("Incorrect email or password.");
             }
 
-            return false;
+            this.State = UserState.Active;
+            this.Last_login = DateTime.Now;
         }
 
-        public bool ChangePassword(string existingPassword, string newPassword) {
-            if (string.IsNullOrEmpty(existingPassword) || string.IsNullOrEmpty(newPassword)){
-                return false;
+        public void ChangePassword(string existingPassword, string newPassword) {
+            if (string.IsNullOrEmpty(existingPassword) || string.IsNullOrEmpty(newPassword)) {
+                throw new ArgumentNullException("Passwords cannot be empty.");
             }
-            
-            if (!Utils.Password.VerifyPassword(existingPassword, this.password) && !Utils.Password.CheckPassword(newPassword)) {
-                return false;
+
+            if (!Utils.Password.VerifyPassword(existingPassword, this.password)) {
+                throw new InvalidOperationException("The existing password is not correct.");
+            }
+
+            if (!Utils.Password.CheckPassword(newPassword)) {
+                throw new ArgumentException("The new password does not meet the security requirements.");
             }
 
             Password = newPassword;
-            return true;
         }
 
-        public bool Logout() {
-            if (this.State == UserState.Active) {
-                this.State = UserState.Unactive;
-                return true;
+        public void Logout() {
+            if (this.State != UserState.Active) {
+                throw new InvalidOperationException("Cannot log out when the user is not active.");
             }
-            return false;
+            this.State = UserState.Unactive;
         }
 
-        public bool ChangeDetails(String name, String lastName, String email) {
+        public void ChangeDetails(String name, String lastName, String email) {
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email)) {
-                return false;
+                throw new ArgumentNullException("Name, last name, and email cannot be empty.");
             }
 
             //Crear funcion en utils que compruebe las cuentas de correo electronico
             //if(!checkEmail(email))
+
             Name = name;
             LastName = lastName;
             Email = email;
-
-            return false;
         }
 
-        public bool Subscribe() {
-            if (!this.Is_Subscription) {
-                this.Is_Subscription = true;
-                return true;
+        public void Subscribe() {
+            if (this.Is_Subscription) {
+                throw new InvalidOperationException("The user is already subscribed.");
             }
-            return false;
+            this.Is_Subscription = true;
         }
 
         public void Unsubscribe() {
@@ -130,32 +128,20 @@ namespace Practica.Model {
 
         public override bool Equals(object obj) {
             return obj is User user &&
-                   Id == user.Id &&
-                   Name == user.Name &&
-                   LastName == user.LastName &&
-                   Email == user.Email &&
-                   password == user.password &&
-                   Is_Subscription == user.Is_Subscription &&
-                   Is_superuser == user.Is_superuser &&
-                   Is_active == user.Is_active &&
-                   State == user.State &&
-                   Last_login == user.Last_login &&
-                   EqualityComparer<List<Activity>>.Default.Equals(Activities, user.Activities);
+                    Id == user.Id &&
+                    Name == user.Name &&
+                    LastName == user.LastName &&
+                    Email == user.Email &&
+                    password == user.password;
         }
 
         public override int GetHashCode() {
-            int hashCode = 1460853562;
+            int hashCode = 1734723601;
             hashCode = hashCode * -1521134295 + Id.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(password);
-            hashCode = hashCode * -1521134295 + Is_Subscription.GetHashCode();
-            hashCode = hashCode * -1521134295 + Is_superuser.GetHashCode();
-            hashCode = hashCode * -1521134295 + Is_active.GetHashCode();
-            hashCode = hashCode * -1521134295 + State.GetHashCode();
-            hashCode = hashCode * -1521134295 + Last_login.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<Activity>>.Default.GetHashCode(Activities);
             return hashCode;
         }
     }

@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Practica.Utils {
-    internal class Class1 {
+    internal class email {
     }
 }
