@@ -16,17 +16,18 @@ namespace Practica_1.Model {
         private bool subscription;
         private bool is_superuser;
         private bool is_active;
+        private char state;
         private DateTime last_login;
 
         public User(string name, string lastName, string email, string password) {
-            this.id = 1;
             this.name = name;
             this.lastName = lastName;
             this.email = email;
-            this.password = Utils.Password.EncriptPassword(password); ;
+            this.password = Utils.Password.EncriptPassword(password);
             this.subscription = false;
             this.is_superuser = false;
             this.is_active = false;
+            this.state = 'u';
             this.last_login = DateTime.Now;
         }
 
@@ -38,7 +39,7 @@ namespace Practica_1.Model {
             this.password = Utils.Password.EncriptPassword("admin");
             this.subscription = true;
             this.is_superuser = true;
-            this.is_active = false;
+            this.state = 'u';
             this.last_login = DateTime.Now;
         }
 
@@ -49,8 +50,25 @@ namespace Practica_1.Model {
         public String Password { set { this.password = Utils.Password.EncriptPassword(value); } }
         public bool Subscription { get { return this.subscription; } set { this.subscription = value; } }
         public bool Is_superuser { get { return this.is_superuser; } set { this.is_superuser = value; } }
-        public bool Is_active { get { return this.is_active; } set { this.is_active = value; } }
+        public char State { get { return this.state; } set { this.state = value; } }
         public DateTime Last_login { get { return this.last_login; } set { this.last_login = value; } }
+
+        public bool Register(string name, string lastName, string email, string password) {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) ) { 
+                return false;
+            }
+            if (!Utils.Password.CheckPassword(password) || email != this.email) {
+                //Modificar luego el tema del email para comparar con la bd
+                return false;
+            }
+
+            this.name = name;
+            this.lastName = lastName;
+            this.email = email;
+            this.password = Utils.Password.EncriptPassword(password);
+
+            return true;
+        }
 
         public bool Login(string email, string password) {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
@@ -58,6 +76,8 @@ namespace Practica_1.Model {
             }
 
             if (Utils.Password.VerifyPassword(password, this.password) && this.Email.Equals(email)) {
+                this.state = 'a';
+                this.last_login = DateTime.Now;
                 return true;
             }
 
@@ -69,7 +89,7 @@ namespace Practica_1.Model {
                 return false;
             }
             
-            if (!Utils.Password.VerifyPassword(existingPassword, this.password)){
+            if (!Utils.Password.VerifyPassword(existingPassword, this.password) && !Utils.Password.CheckPassword(newPassword)) {
                 return false;
             }
 

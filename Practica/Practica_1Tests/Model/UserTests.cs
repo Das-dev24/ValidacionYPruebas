@@ -92,7 +92,7 @@ namespace Practica_1.Model.Tests
             Assert.IsTrue(changeSuccess, "El cambio de contraseña debería ser exitoso.");
             Assert.IsTrue(user.Login(email, newPassword), "El usuario debería poder iniciar sesión con la nueva contraseña.");
             Assert.IsFalse(changeFail, "El cambio de contraseña debería fallar con la contraseña actual incorrecta.");
-           Assert.IsFalse(changeFail2, "El cambio de contraseña debería fallar si no se introduce contraseña o se introduce en blanco.");
+            Assert.IsFalse(changeFail2, "El cambio de contraseña debería fallar si no se introduce contraseña o se introduce en blanco.");
             Assert.IsFalse(user.Login(email, initialPassword), "El usuario no debería poder iniciar sesión con la contraseña anterior.");
         }
 

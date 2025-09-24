@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Practica_1.Model;
 
-namespace Practica.Model
+namespace Practica_1.Model
 
 {
     public class ActividadCycling : Activity

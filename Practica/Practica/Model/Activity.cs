@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Practica_1.Model;
 
-namespace Practica.Model
-{
-    public abstract class Activity
-    {
+namespace Practica_1.Model {
+    public abstract class Activity {
         // Atributos comunes (pueden ser protected para que los hijos los vean)
         protected int IdActivity { get; set; }
         protected int IdUser { get; set; }
