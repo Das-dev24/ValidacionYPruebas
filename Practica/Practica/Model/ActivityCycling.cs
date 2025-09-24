@@ -15,8 +15,8 @@ namespace Practica.Model
         private string place;
 
 
-        public ActividadCycling(int idActivivty, int user, string name, string typeActivity, DateTime start, int duration, string notes, string place, float distance, int slope)
-            : base(idActivivty, user, name, typeActivity, start, duration, notes)
+        public ActividadCycling(User user, string name, string typeActivity, DateTime start, int duration, string notes, string place, float distance, int slope)
+            : base(user, name, typeActivity, start, duration, notes)
         {
             base.TypeActivity = "Ciclismo";
             this.place = place;

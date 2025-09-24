@@ -10,22 +10,52 @@ namespace Datos {
     internal class CapaDatos : ICapaDatos {
 
         List<User> Users = new List<User>();
+        List<Activity> Activities = new List<Activity>();
 
         public bool GuardaActivity(Activity e) {
-            throw new NotImplementedException();
+            if (Activities.Contains(e)) {
+                return false;
+            } else
+            {
+                Activities.Add(e);
+                return true;
+            }
         }
 
         public bool GuardaUser(User u) {
-            throw new NotImplementedException();
+            if (Users.Contains(u))
+            {
+                return false;
+            }
+            else
+            {
+                Users.Add(u);
+                return true;
+            }
         }
 
         public Activity LeeActivity(int idElemento) {
-            throw new NotImplementedException();
+
+            if (idElemento < 0 || idElemento >= Activities.Count)
+            {
+                return null;
+            } else
+            {
+                return Activities[idElemento];
+            }
         }
 
         public User LeeUser(string email)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < Users.Count; i++)
+            {
+                if (Users[i].Email == email)
+                {
+                    return Users[i];
+                }
+            }
+            return null;
+
         }
 
         public int NumActivityes(int idUser)

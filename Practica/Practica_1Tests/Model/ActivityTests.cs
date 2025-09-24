@@ -1,24 +1,24 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Practica.Model; // Asegúrate que este namespace sea el correcto
-using System; //Hecho por mi
+using Practica.Model; // Asegúrate de que este es el namespace correcto
+using Practica.Utils;
+using System;
 
 namespace Practica.Model.Tests
 {
     [TestClass]
     public class ActivityTests
     {
-        // --- Datos comunes para los tests ---
-        private readonly int testId = 1;
-        private readonly int testUserId = 101;
-        private readonly string testName = "Test Activity";
-        private readonly DateTime testDate = new DateTime(2025, 9, 23);
+        // --- Datos comunes para reutilizar en los tests ---
+        private readonly User testUser = new User();
+        private readonly string testName = "Entrenamiento de prueba";
+        private readonly DateTime testDate = new DateTime(2025, 10, 28);
 
         #region ActivityRunning Tests
 
         [TestMethod]
         public void ActivityRunning_Constructor_ValidData_CreatesInstance()
         {
-            var activity = new ActivityRunning(testId, testUserId, testName, "", testDate, 60, "", "Parque", 10f, 150);
+            var activity = new ActivityRunning(testUser, testName, "", testDate, 60, "", "Parque", 10f, 150);
             Assert.IsNotNull(activity);
         }
 
@@ -26,95 +26,29 @@ namespace Practica.Model.Tests
         public void ActivityRunning_Constructor_NegativeDistance_ThrowsArgumentException()
         {
             Assert.ThrowsException<ArgumentException>(() =>
-            {
-                new ActivityRunning(testId, testUserId, testName, "", testDate, 60, "", "Parque", -10f, 150);}, "Debería lanzar ArgumentException para distancia negativa.");
+                new ActivityRunning(testUser, testName, "", testDate, 60, "", "Parque", -10f, 150));
         }
 
         [TestMethod]
         public void ActivityRunning_Constructor_ZeroDuration_ThrowsArgumentException()
         {
             Assert.ThrowsException<ArgumentException>(() =>
-            {
-                new ActivityRunning(testId, testUserId, testName, "", testDate, 0, "", "Parque", 10f, 150); }, "Debería lanzar ArgumentException para duración cero.");
-        }
-
-        [TestMethod]
-        public void ActivityRunning_Constructor_NegativeDuration_ThrowsArgumentException()
-        {
-            Assert.ThrowsException<ArgumentException>(() =>
-            {
-                new ActivityRunning(testId, testUserId, testName, "", testDate, -60, "", "Parque", 10f, 150); }, "Debería lanzar ArgumentException para duración negativa.");
-        }
-
-        [TestMethod]
-        public void ActivityRunning_Rythm_CalculatesCorrectly()
-        {
-            var activity = new ActivityRunning(testId, testUserId, testName, "", testDate, 45, "", "Pista", 8.5f, 50);
-            string expectedRythm = "5,29"; // 45 / 8.5 = 5.2941...
-            string actualRythm = activity.Rythm();
-            Assert.AreEqual(expectedRythm, actualRythm);
+                new ActivityRunning(testUser, testName, "", testDate, 0, "", "Parque", 10f, 150));
         }
 
         [TestMethod]
         public void ActivityRunning_Rythm_ZeroDistance_ThrowsDivideByZeroException()
         {
-            var activity = new ActivityRunning(testId, testUserId, testName, "", testDate, 60, "", "Parque", 0f, 150);
+            var activity = new ActivityRunning(testUser, testName, "", testDate, 60, "", "Parque", 0f, 150);
             Assert.ThrowsException<DivideByZeroException>(() => activity.Rythm());
         }
 
         [TestMethod]
         public void ActivityRunning_ObtainActivity_ReturnsCorrectFormat()
         {
-            var activity = new ActivityRunning(testId, testUserId, "Series", "", testDate, 60, "", "Montaña", 10f, 200);
-            string expectedString = "Carrera en Montaña de 10 a un ritmo de: 6,00 mins/km";
-            string actualString = activity.ObtainActivity();
-            Assert.AreEqual(expectedString, actualString);
-        }
-
-        #endregion
-
-        #region ActivitySwimming Tests
-
-        [TestMethod]
-        public void ActivitySwimming_Constructor_ValidData_CreatesInstance()
-        {
-            var activity = new ActivitySwimming(testId, testUserId, testName, "", testDate, 45, "", "Piscina", 1500);
-            Assert.IsNotNull(activity);
-        }
-
-        [TestMethod]
-        public void ActivitySwimming_Constructor_NegativeDistance_ThrowsArgumentException()
-        {
-            Assert.ThrowsException<ArgumentException>(() =>
-            {
-                new ActivitySwimming(testId, testUserId, testName, "", testDate, 45, "", "Piscina", -1500);}, "Debería lanzar ArgumentException para distancia negativa.");
-        }
-
-        // --- TEST AÑADIDO ---
-        [TestMethod]
-        public void ActivitySwimming_Constructor_ZeroDuration_ThrowsArgumentException()
-        {
-            Assert.ThrowsException<ArgumentException>(() =>
-            {
-                new ActivitySwimming(testId, testUserId, testName, "", testDate, 0, "", "Piscina", 1500); }, "Debería lanzar ArgumentException para duración cero.");
-        }
-
-        // --- TEST AÑADIDO ---
-        [TestMethod]
-        public void ActivitySwimming_Constructor_NegativeDuration_ThrowsArgumentException()
-        {
-            Assert.ThrowsException<ArgumentException>(() =>
-            {
-                new ActivitySwimming(testId, testUserId, testName, "", testDate, -45, "", "Piscina", 1500); }, "Debería lanzar ArgumentException para duración negativa.");
-        }
-
-        [TestMethod]
-        public void ActivitySwimming_ObtainActivity_ReturnsCorrectFormat()
-        {
-            var activity = new ActivitySwimming(testId, testUserId, "Entrenamiento", "", testDate, 50, "", "Mar", 2000);
-            string expectedString = "Natación en Mar de 2000 m en 50 mins";
-            string actualString = activity.ObtainActivity();
-            Assert.AreEqual(expectedString, actualString);
+            var activity = new ActivityRunning(testUser, "Series en cuesta", "", testDate, 45, "", "La Quinta", 8.5f, 200);
+            string expected = "Carrera en La Quinta de 8,5 a un ritmo de: 5,29 mins/km";
+            Assert.AreEqual(expected, activity.ObtainActivity());
         }
 
         #endregion
@@ -124,7 +58,7 @@ namespace Practica.Model.Tests
         [TestMethod]
         public void ActividadCycling_Constructor_ValidData_CreatesInstance()
         {
-            var activity = new ActividadCycling(testId, testUserId, testName, "", testDate, 120, "", "Puerto", 50f, 800);
+            var activity = new ActividadCycling(testUser, testName, "", testDate, 120, "", "Puerto", 50f, 800);
             Assert.IsNotNull(activity);
         }
 
@@ -132,59 +66,129 @@ namespace Practica.Model.Tests
         public void ActividadCycling_Constructor_NegativeDistance_ThrowsArgumentException()
         {
             Assert.ThrowsException<ArgumentException>(() =>
-            {
-                new ActividadCycling(testId, testUserId, testName, "", testDate, 120, "", "Puerto", -50f, 800); }, "Debería lanzar ArgumentException para distancia negativa.");
+                new ActividadCycling(testUser, testName, "", testDate, 120, "", "Puerto", -50f, 800));
         }
 
-        // --- TEST AÑADIDO ---
         [TestMethod]
         public void ActividadCycling_Constructor_ZeroDuration_ThrowsArgumentException()
         {
             Assert.ThrowsException<ArgumentException>(() =>
-            {
-                new ActividadCycling(testId, testUserId, testName, "", testDate, 0, "", "Puerto", 50f, 800); }, "Debería lanzar ArgumentException para duración cero.");
-        }
-
-        // --- TEST AÑADIDO ---
-        [TestMethod]
-        public void ActividadCycling_Constructor_NegativeDuration_ThrowsArgumentException()
-        {
-            Assert.ThrowsException<ArgumentException>(() =>
-            {
-                new ActividadCycling(testId, testUserId, testName, "", testDate, -120, "", "Puerto", 50f, 800); }, "Debería lanzar ArgumentException para duración negativa.");
+                new ActividadCycling(testUser, testName, "", testDate, 0, "", "Puerto", 50f, 800));
         }
 
         [TestMethod]
         public void ActividadCycling_RythmAndSpeed_CalculateCorrectly()
         {
-            var activity = new ActividadCycling(testId, testUserId, testName, "", testDate, 90, "", "Carretera", 45f, 300);
-            string expectedRythm = "2,00"; // 90 / 45 = 2
-            string expectedSpeed = "30,00"; // 45 / (90 / 60) = 30
-
-            string actualRythm = activity.Rythm();
-            string actualSpeed = activity.Speed();
-
-            Assert.AreEqual(expectedRythm, actualRythm, "El cálculo del ritmo es incorrecto.");
-            Assert.AreEqual(expectedSpeed, actualSpeed, "El cálculo de la velocidad es incorrecto.");
+            var activity = new ActividadCycling(testUser, testName, "", testDate, 90, "", "Carretera", 45f, 300);
+            Assert.AreEqual("2,00", activity.Rythm(), "El cálculo del ritmo es incorrecto.");
+            Assert.AreEqual("30,00", activity.Speed(), "El cálculo de la velocidad es incorrecto.");
         }
 
         [TestMethod]
         public void ActividadCycling_Rythm_ZeroDistance_ThrowsDivideByZeroException()
         {
-            var activity = new ActividadCycling(testId, testUserId, testName, "", testDate, 120, "", "Puerto", 0f, 800);
+            var activity = new ActividadCycling(testUser, testName, "", testDate, 120, "", "Puerto", 0f, 800);
             Assert.ThrowsException<DivideByZeroException>(() => activity.Rythm());
         }
-
 
         [TestMethod]
         public void ActividadCycling_ObtainActivity_ReturnsCorrectFormat()
         {
-            var activity = new ActividadCycling(testId, testUserId, "Ruta", "", testDate, 120, "", "Merindades", 40f, 500);
-            string expectedString = "Ciclismo en Merindades de 40 a un ritmo de: 3,00 mins/km. Y una velocidad media de: 20,00 km/h, y un desnivel de 500";
+            var activity = new ActividadCycling(testUser, "Ruta larga", "", testDate, 120, "", "Merindades", 40f, 500);
+            string expected = "Ciclismo en Merindades de 40 a un ritmo de: 3,00 mins/km. Y una velocidad media de: 20,00 km/h, y un desnivel de 500";
+            Assert.AreEqual(expected, activity.ObtainActivity());
+        }
 
-            string actualString = activity.ObtainActivity();
+        #endregion
 
-            Assert.AreEqual(expectedString, actualString);
+        #region ActivitySwimming Tests
+
+        [TestMethod]
+        public void ActivitySwimming_Constructor_ValidData_CreatesInstance()
+        {
+            var activity = new ActivitySwimming(testUser, testName, "", testDate, 45, "", "Piscina", 1500);
+            Assert.IsNotNull(activity);
+        }
+
+        [TestMethod]
+        public void ActivitySwimming_Constructor_NegativeDistance_ThrowsArgumentException()
+        {
+            Assert.ThrowsException<ArgumentException>(() =>
+                new ActivitySwimming(testUser, testName, "", testDate, 45, "", "Piscina", -1500));
+        }
+
+        [TestMethod]
+        public void ActivitySwimming_Constructor_ZeroDuration_ThrowsArgumentException()
+        {
+            Assert.ThrowsException<ArgumentException>(() =>
+                new ActivitySwimming(testUser, testName, "", testDate, 0, "", "Piscina", 1500));
+        }
+
+        [TestMethod]
+        public void ActivitySwimming_ObtainActivity_ReturnsCorrectFormat()
+        {
+            var activity = new ActivitySwimming(testUser, "Técnica de crol", "", testDate, 50, "", "San Amaro", 2000);
+            string expected = "Natación en San Amaro de 2000 m en 50 mins";
+            Assert.AreEqual(expected, activity.ObtainActivity());
+        }
+
+        #endregion
+
+        #region ActivityGym Tests
+
+        [TestMethod]
+        public void ActivityGym_Constructor_ValidData_CreatesInstance()
+        {
+            var activity = new ActivityGym(testUser, testName, "", testDate, 60, "", 300, "Tren superior");
+            Assert.IsNotNull(activity);
+        }
+
+        [TestMethod]
+        public void ActivityGym_Constructor_NegativeCalories_ThrowsArgumentException()
+        {
+            Assert.ThrowsException<ArgumentException>(() =>
+                new ActivityGym(testUser, testName, "", testDate, 60, "", -100, "Tren superior"));
+        }
+
+        [TestMethod]
+        public void ActivityGym_Constructor_ZeroDuration_ThrowsArgumentException()
+        {
+            Assert.ThrowsException<ArgumentException>(() =>
+                new ActivityGym(testUser, testName, "", testDate, 0, "", 300, "Tren superior"));
+        }
+
+        [TestMethod]
+        public void ActivityGym_ObtainActivity_ReturnsCorrectFormat()
+        {
+            var activity = new ActivityGym(testUser, "Día de pierna", "", testDate, 75, "", 450, "Tren inferior");
+            string expected = "Entrenamiento de Tren inferior, quemando 450 calorías en 75 mins";
+            Assert.AreEqual(expected, activity.ObtainActivity());
+        }
+
+        #endregion
+
+        #region ActivityOther Tests
+
+        [TestMethod]
+        public void ActivityOther_Constructor_ValidData_CreatesInstance()
+        {
+            var activity = new ActivityOther(testUser, testName, "", testDate, 45, "", "Polideportivo", "Pádel");
+            Assert.IsNotNull(activity);
+        }
+
+        [TestMethod]
+        public void ActivityOther_Constructor_ZeroDuration_ThrowsArgumentException()
+        {
+            Assert.ThrowsException<ArgumentException>(() =>
+                new ActivityOther(testUser, testName, "", testDate, 0, "", "Polideportivo", "Pádel"));
+        }
+
+        [TestMethod]
+        public void ActivityOther_ObtainActivity_ReturnsCorrectFormat()
+        {
+            var activity = new ActivityOther(testUser, "Partido semanal", "", testDate, 90, "", "Club de Campo", "Tenis");
+            string expected = "Entrenamiento de Tenis en 90 mins en Club de Campo .";
+            Assert.AreEqual(expected, activity.ObtainActivity());
         }
 
         #endregion

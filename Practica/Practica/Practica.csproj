@@ -44,8 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Activity.cs" />
+    <Compile Include="Model\ActivityOther.cs" />
     <Compile Include="Model\ActivityRunning.cs" />
     <Compile Include="Model\ActivityCycling.cs" />
+    <Compile Include="Model\ActivityGym.cs" />
     <Compile Include="Model\ActivitySwimming.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
