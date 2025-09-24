@@ -27,8 +27,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivityRunning(testId, testUserId, testName, "", testDate, 60, "", "Parque", -10f, 150);
-            }, "Debería lanzar ArgumentException para distancia negativa.");
+                new ActivityRunning(testId, testUserId, testName, "", testDate, 60, "", "Parque", -10f, 150);}, "Debería lanzar ArgumentException para distancia negativa.");
         }
 
         [TestMethod]
@@ -36,8 +35,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivityRunning(testId, testUserId, testName, "", testDate, 0, "", "Parque", 10f, 150);
-            }, "Debería lanzar ArgumentException para duración cero.");
+                new ActivityRunning(testId, testUserId, testName, "", testDate, 0, "", "Parque", 10f, 150); }, "Debería lanzar ArgumentException para duración cero.");
         }
 
         [TestMethod]
@@ -45,15 +43,14 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivityRunning(testId, testUserId, testName, "", testDate, -60, "", "Parque", 10f, 150);
-            }, "Debería lanzar ArgumentException para duración negativa.");
+                new ActivityRunning(testId, testUserId, testName, "", testDate, -60, "", "Parque", 10f, 150); }, "Debería lanzar ArgumentException para duración negativa.");
         }
 
         [TestMethod]
         public void ActivityRunning_Rythm_CalculatesCorrectly()
         {
             var activity = new ActivityRunning(testId, testUserId, testName, "", testDate, 45, "", "Pista", 8.5f, 50);
-            string expectedRythm = "5.29"; // 45 / 8.5 = 5.2941...
+            string expectedRythm = "5,29"; // 45 / 8.5 = 5.2941...
             string actualRythm = activity.Rythm();
             Assert.AreEqual(expectedRythm, actualRythm);
         }
@@ -69,7 +66,7 @@ namespace Practica.Model.Tests
         public void ActivityRunning_ObtainActivity_ReturnsCorrectFormat()
         {
             var activity = new ActivityRunning(testId, testUserId, "Series", "", testDate, 60, "", "Montaña", 10f, 200);
-            string expectedString = "Carrera en Montaña de 10 a un ritmo de: 6.00 mins/km";
+            string expectedString = "Carrera en Montaña de 10 a un ritmo de: 6,00 mins/km";
             string actualString = activity.ObtainActivity();
             Assert.AreEqual(expectedString, actualString);
         }
@@ -90,8 +87,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivitySwimming(testId, testUserId, testName, "", testDate, 45, "", "Piscina", -1500);
-            }, "Debería lanzar ArgumentException para distancia negativa.");
+                new ActivitySwimming(testId, testUserId, testName, "", testDate, 45, "", "Piscina", -1500);}, "Debería lanzar ArgumentException para distancia negativa.");
         }
 
         // --- TEST AÑADIDO ---
@@ -100,8 +96,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivitySwimming(testId, testUserId, testName, "", testDate, 0, "", "Piscina", 1500);
-            }, "Debería lanzar ArgumentException para duración cero.");
+                new ActivitySwimming(testId, testUserId, testName, "", testDate, 0, "", "Piscina", 1500); }, "Debería lanzar ArgumentException para duración cero.");
         }
 
         // --- TEST AÑADIDO ---
@@ -110,8 +105,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActivitySwimming(testId, testUserId, testName, "", testDate, -45, "", "Piscina", 1500);
-            }, "Debería lanzar ArgumentException para duración negativa.");
+                new ActivitySwimming(testId, testUserId, testName, "", testDate, -45, "", "Piscina", 1500); }, "Debería lanzar ArgumentException para duración negativa.");
         }
 
         [TestMethod]
@@ -139,8 +133,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActividadCycling(testId, testUserId, testName, "", testDate, 120, "", "Puerto", -50f, 800);
-            }, "Debería lanzar ArgumentException para distancia negativa.");
+                new ActividadCycling(testId, testUserId, testName, "", testDate, 120, "", "Puerto", -50f, 800); }, "Debería lanzar ArgumentException para distancia negativa.");
         }
 
         // --- TEST AÑADIDO ---
@@ -149,8 +142,7 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActividadCycling(testId, testUserId, testName, "", testDate, 0, "", "Puerto", 50f, 800);
-            }, "Debería lanzar ArgumentException para duración cero.");
+                new ActividadCycling(testId, testUserId, testName, "", testDate, 0, "", "Puerto", 50f, 800); }, "Debería lanzar ArgumentException para duración cero.");
         }
 
         // --- TEST AÑADIDO ---
@@ -159,16 +151,15 @@ namespace Practica.Model.Tests
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                new ActividadCycling(testId, testUserId, testName, "", testDate, -120, "", "Puerto", 50f, 800);
-            }, "Debería lanzar ArgumentException para duración negativa.");
+                new ActividadCycling(testId, testUserId, testName, "", testDate, -120, "", "Puerto", 50f, 800); }, "Debería lanzar ArgumentException para duración negativa.");
         }
 
         [TestMethod]
         public void ActividadCycling_RythmAndSpeed_CalculateCorrectly()
         {
             var activity = new ActividadCycling(testId, testUserId, testName, "", testDate, 90, "", "Carretera", 45f, 300);
-            string expectedRythm = "2.00"; // 90 / 45 = 2
-            string expectedSpeed = "30.00"; // 45 / (90 / 60) = 30
+            string expectedRythm = "2,00"; // 90 / 45 = 2
+            string expectedSpeed = "30,00"; // 45 / (90 / 60) = 30
 
             string actualRythm = activity.Rythm();
             string actualSpeed = activity.Speed();
@@ -184,17 +175,12 @@ namespace Practica.Model.Tests
             Assert.ThrowsException<DivideByZeroException>(() => activity.Rythm());
         }
 
-        public void ActividadCycling_Rythm_Zero_ThrowsDivideByZeroException()
-        {
-            var activity = new ActividadCycling(testId, testUserId, testName, "", testDate, 0, "", "Puerto", 40f, 800);
-            Assert.ThrowsException<DivideByZeroException>(() => activity.Rythm());
-        }
 
         [TestMethod]
         public void ActividadCycling_ObtainActivity_ReturnsCorrectFormat()
         {
             var activity = new ActividadCycling(testId, testUserId, "Ruta", "", testDate, 120, "", "Merindades", 40f, 500);
-            string expectedString = "Ciclismo en Merindades de 40 a un ritmo de: 3.00 mins/km. Y una velocidad media de: 20.00 km/h, y un desnivel de 500";
+            string expectedString = "Ciclismo en Merindades de 40 a un ritmo de: 3,00 mins/km. Y una velocidad media de: 20,00 km/h, y un desnivel de 500";
 
             string actualString = activity.ObtainActivity();
 
