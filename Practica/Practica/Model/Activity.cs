@@ -8,8 +8,7 @@ using Practica.Model;
 namespace Practica.Model {
     public abstract class Activity {
         // Atributos comunes (pueden ser protected para que los hijos los vean)
-        protected int IdActivity { get; set; }
-        protected int IdUser { get; set; }
+        protected User User { get; set; }
         protected string Name { get; set; }
         protected string TypeActivity { get; set; } // 1: Carrera, 2: Ciclismo, 3: Natacion, 4: Triatlon
         protected DateTime StartTime { get; set; }
@@ -17,9 +16,8 @@ namespace Practica.Model {
         protected string Notes { get; set; }
 
         // Constructor de la clase base
-        public Activity(int idActivity, int idUser, string name, string type, DateTime startTime, int duration, string notes) {
-            this.IdActivity = idActivity;
-            this.IdUser = idUser;
+        public Activity(User user, string name, string type, DateTime startTime, int duration, string notes) {
+            this.User = User;
             this.Name = name;
             this.TypeActivity = type;
             this.StartTime = startTime;
