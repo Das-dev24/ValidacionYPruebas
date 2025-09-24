@@ -1,5 +1,5 @@
 ﻿using Database;
-using Practica_1.Model;
+using Practica.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Datos {
     internal class CapaDatos : ICapaDatos {
 
-
+        List<User> Users = new List<User>();
 
         public bool GuardaActivity(Activity e) {
             throw new NotImplementedException();
@@ -43,8 +43,7 @@ namespace Datos {
             throw new NotImplementedException();
         }
 
-        public bool ValidaUser(string email, string password)
-        {
+        public bool ValidaUser(string email, string password){
             throw new NotImplementedException();
         }
     }

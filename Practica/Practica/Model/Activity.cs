@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Practica_1.Model;
+using Practica.Model;
 
-namespace Practica_1.Model {
+namespace Practica.Model {
     public abstract class Activity {
         // Atributos comunes (pueden ser protected para que los hijos los vean)
         protected int IdActivity { get; set; }
@@ -17,8 +17,7 @@ namespace Practica_1.Model {
         protected string Notes { get; set; }
 
         // Constructor de la clase base
-        public Activity(int idActivity, int idUser, string name, string type, DateTime startTime, int duration, string notes)
-        {
+        public Activity(int idActivity, int idUser, string name, string type, DateTime startTime, int duration, string notes) {
             this.IdActivity = idActivity;
             this.IdUser = idUser;
             this.Name = name;
@@ -27,7 +26,6 @@ namespace Practica_1.Model {
             this.Duration = duration;
             this.Notes = notes;
         }
-
 
         public abstract string ObtainActivity();
     }

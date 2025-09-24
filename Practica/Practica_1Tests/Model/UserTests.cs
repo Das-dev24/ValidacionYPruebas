@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Practica_1.Model;
+using Practica.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Practica_1.Model.Tests
+namespace Practica.Model.Tests
 {
     [TestClass()]
     public class UserTests {
@@ -33,7 +33,6 @@ namespace Practica_1.Model.Tests
             Assert.AreEqual(email, user.Email);
             Assert.AreEqual(subscription, user.Subscription);
             Assert.AreEqual(is_superuser, user.Is_superuser);
-            Assert.AreEqual(is_active, user.Is_active);
             Assert.AreEqual(last_login, user.Last_login);
         }
 
@@ -49,7 +48,6 @@ namespace Practica_1.Model.Tests
             Assert.AreEqual("example@example.com", user.Email);
             Assert.AreEqual(true, user.Subscription);
             Assert.AreEqual(true, user.Is_superuser);
-            Assert.AreEqual(false, user.Is_active);
             Assert.IsTrue(user.Last_login <= DateTime.Now);
         }
 

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Practica_1.Model;
+using Practica.Model;
 
-namespace Practica_1.Model
+namespace Practica.Model
 
 {
     public class ActividadCycling : Activity

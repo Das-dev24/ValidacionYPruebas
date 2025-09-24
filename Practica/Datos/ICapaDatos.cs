@@ -1,5 +1,5 @@
 ﻿using System;
-using Practica_1.Model;
+using Practica.Model;
 
 namespace Database
 {

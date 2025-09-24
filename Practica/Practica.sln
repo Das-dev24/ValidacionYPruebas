@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36429.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practica_1", "Practica\Practica_1.csproj", "{A637340F-116C-46A7-9408-1B819BE639F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practica", "Practica\Practica.csproj", "{A637340F-116C-46A7-9408-1B819BE639F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practica_1Tests", "Practica_1Tests\Practica_1Tests.csproj", "{232E6ED1-799C-4FC7-AAC2-392C0A3D0142}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticaTests", "Practica_1Tests\PracticaTests.csproj", "{232E6ED1-799C-4FC7-AAC2-392C0A3D0142}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "Datos\Datos.csproj", "{DA42CE31-B7D2-40EF-A6AB-5D3565A2EEFF}"
 EndProject
