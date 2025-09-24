@@ -21,6 +21,17 @@ namespace Practica.Model
             base.TypeActivity = "Natación";
             this.place = place;
             this.distance = distance;
+
+            if (distance < 0f)
+            {
+                throw new ArgumentException("La distancia en natación no puede ser negativa.");
+            }
+
+            if(duration <= 0f)
+            {
+                throw new ArgumentException("La duración debe ser mayor que cero.");
+            }
+
         }
         public override string ObtainActivity()
         {

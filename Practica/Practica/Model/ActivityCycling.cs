@@ -22,6 +22,16 @@ namespace Practica.Model
             this.place = place;
             this.distance = distance;
             this.slope = slope;
+
+            if (distance < 0f)
+            {
+                throw new ArgumentException("La distancia debe ser mayor que cero.");
+            }
+
+            if (duration <= 0f)
+            {
+                throw new ArgumentException("La duración debe ser mayor que cero.");
+            }
         }
 
 
@@ -32,12 +42,20 @@ namespace Practica.Model
         }
         public string Rythm()
         {
+            if (distance == 0)
+            {
+                throw new DivideByZeroException("La distancia no puede ser cero al calcular el ritmo.");
+            }
             float rythm = base.Duration / this.distance;
             return rythm.ToString("0.00");
         }
         public string Speed()
         {
-            float speed = this.distance / (base.Duration / 60);
+            if (base.Duration == 0)
+            {
+                throw new DivideByZeroException("La duración no puede ser cero al calcular la velocidad.");
+            } 
+            float speed = this.distance / (base.Duration / 60f);
             return speed.ToString("0.00");
         }
     }
