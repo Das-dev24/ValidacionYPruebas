@@ -26,5 +26,9 @@ namespace Practica.Model {
         }
 
         public abstract string ObtainActivity();
+
+        public User GetUser() {
+            return User;
+        }
     }
 }

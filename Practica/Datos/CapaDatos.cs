@@ -60,17 +60,36 @@ namespace Datos {
 
         public int NumActivityes(int idUser)
         {
-            throw new NotImplementedException();
+            int contador = 0;
+
+            for (int i = 0; i < Activities.Count; i++)
+            {
+                if (Activities[i].GetUser().getId() == idUser) //Hay que implementar getId en User
+                {
+                    contador++;
+                }
+            }
+
+            return contador;
         }
 
         public int NumUsers()
         {
-            throw new NotImplementedException();
+            int numUsers = Users.Count;
+            return numUsers;
         }
 
         public int NumUsersActivos()
         {
-            throw new NotImplementedException();
+            int contador = 0;
+            for (int i = 0; i < Users.Count; i++)
+            {
+                if (Users[i].Is_active)
+                {
+                    contador++;
+                }
+            }
+            return contador;
         }
 
         public bool ValidaUser(string email, string password){
