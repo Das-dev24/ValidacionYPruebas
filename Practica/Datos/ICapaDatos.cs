@@ -64,5 +64,6 @@ namespace Database
         /// <returns>Número de Activityes.</returns>
         int NumActivityes(int idUser);
 
+        void Register(string name, string lastName, string email, string password);
     }
 }

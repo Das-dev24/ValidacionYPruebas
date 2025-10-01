@@ -1,10 +1,22 @@
-﻿using System;
+﻿using Practica.Model;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace Practica.Utils {
-    internal class email {
+    public class Email {
+
+        public static bool IsValidFormat(string email) {
+            if (string.IsNullOrWhiteSpace(email)) {
+                return false;
+            }
+
+            try {
+                var mailAddress = new MailAddress(email);
+                return true;
+            } catch (FormatException) {
+                return false;
+            }
+        }
     }
 }

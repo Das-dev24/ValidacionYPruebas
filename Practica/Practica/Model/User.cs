@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
-using Practica.Utils;
 
 namespace Practica.Model {
 
@@ -21,7 +16,6 @@ namespace Practica.Model {
         public string Password { get { return this.password; } set { this.password = Utils.Password.EncriptPassword(value); } }
         public bool Is_Subscription { get; set; }
         public bool Is_superuser { get; set; }
-        public bool Is_active { get; set; }
         public UserState State { get; set; }
         public DateTime Last_login { get; set; }
         public List<Activity> Activities { get; } = new List<Activity>();
@@ -31,39 +25,11 @@ namespace Practica.Model {
             this.Name = name;
             this.LastName = lastName;
             this.Email = email;
-            this.Password = password;
+            this.Password = Utils.Password.EncriptPassword(password);
             this.Is_Subscription = false;
             this.Is_superuser = false;
-            this.Is_active = false;
             this.State = UserState.Unactive;
             this.Last_login = DateTime.Now;
-        }
-        public User() {
-            this.Id = 1;
-            this.Name = "Admin";
-            this.LastName = "Admin";
-            this.Email = "example@example.com";
-            this.Password = "Admin_123456";
-            this.Is_Subscription = false;
-            this.Is_superuser = true;
-            this.Is_active = false;
-            this.State = UserState.Unactive;
-            this.Last_login = DateTime.Now;
-        }
-
-        public void Register(string name, string lastName, string email, string password) {
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
-                throw new ArgumentNullException("All fields must be filled out for registration.");
-            }
-            if (!Utils.Password.CheckPassword(password) || email == Email) {
-                // Modificar luego el tema del email para comparar con la bd
-                throw new ArgumentException("Password does not meet requirements or email is invalid.");
-            }
-
-            Name = name;
-            LastName = lastName;
-            Email = email;
-            Password = password;
         }
 
         public void Login(string email, string password) {
@@ -107,12 +73,11 @@ namespace Practica.Model {
                 throw new ArgumentNullException("Name, last name, and email cannot be empty.");
             }
 
-            //Crear funcion en utils que compruebe las cuentas de correo electronico
-            //if(!checkEmail(email))
-
-            Name = name;
-            LastName = lastName;
-            Email = email;
+            if (Utils.Email.IsValidFormat(email)) {
+                Name = name;
+                LastName = lastName;
+                Email = email;
+            }
         }
 
         public void Subscribe() {
@@ -124,6 +89,20 @@ namespace Practica.Model {
 
         public void Unsubscribe() {
             this.Is_Subscription = false;
+        }
+
+        public void Block() {
+            if (this.State == UserState.Blocked) {
+                throw new InvalidOperationException("El usuario ya se encuentra bloqueado.");
+            }
+            this.State = UserState.Blocked;
+        }
+
+        public void Unblock() {
+            if (this.State != UserState.Blocked) {
+                throw new InvalidOperationException("El usuario no está bloqueado.");
+            }
+            this.State = UserState.Unactive;
         }
 
         public override bool Equals(object obj) {
