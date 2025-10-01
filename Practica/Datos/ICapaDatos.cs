@@ -1,10 +1,8 @@
 ﻿using System;
 using Practica.Model;
 
-namespace Database
-{
-    internal interface ICapaDatos
-    {
+namespace Database {
+    public interface ICapaDatos {
         /// Este Interfaz se entrga a modo de requisitos mínimos a implementar y probar.
         /// Debéis de incluir funcionalidades adicionales
 

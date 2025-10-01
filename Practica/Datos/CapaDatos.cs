@@ -9,7 +9,7 @@ using System.Xml.Linq;
 using Practica.Utils;
 
 namespace Datos {
-    internal class CapaDatos : ICapaDatos {
+    public class CapaDatos : ICapaDatos {
 
         private List<User> Users = new List<User>();
         private List<Activity> Activities = new List<Activity>();
@@ -61,7 +61,6 @@ namespace Datos {
                 throw new ArgumentNullException("All fields must be filled out for registration.");
             }
             if (!Password.CheckPassword(password) || LeeUser(email) != null  || !Email.IsValidFormat(email)) {
-                // Modificar luego el tema del email para comparar con la bd
                 throw new ArgumentException("Password does not meet requirements or email is invalid.");
             }
 

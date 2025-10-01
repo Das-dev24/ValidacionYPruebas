@@ -46,6 +46,7 @@
     <Compile Include="CapaDatos.cs" />
     <Compile Include="ICapaDatos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seeder\DatabaseSeeder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Practica\Practica.csproj">
