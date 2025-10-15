@@ -1,151 +1,151 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="WWW.LogIn" %>
+﻿<%-- Esta línea es la corrección. Le dice a ASP.NET que use C# --%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="WWW.LogIn" %>
 
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es">
 <head runat="server">
-    <title></title>
-    <style type="text/css">
-        .auto-style1 {
-            width: 182px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .auto-style2 {
-            width: 37px;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
-        .auto-style3 {
-            width: 460px;
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
         }
-        .auto-style4 {            text-align: center;
-        }
-        .auto-style5 {
-            width: 182px;
-            height: 23px;
-        }
-        .auto-style6 {
-            height: 23px;
-            text-align: right;
-        }
-        .auto-style7 {
-            width: 37px;
-            height: 23px;
-        }
-        .auto-style8 {
-            width: 460px;
-            height: 23px;
-        }
-        .auto-style10 {
-            text-align: right;
-            width: 444px;
-        }
-        .newStyle1 {
+
+        .login-header {
             text-align: center;
+            margin-bottom: 30px;
         }
-        .auto-style11 {
-            height: 23px;
-            text-align: right;
-            width: 444px;
+
+        .login-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
         }
-        .auto-style12 {
-            text-align: center;
-            width: 444px;
+
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .error-message {
+            background-color: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div>
+    <form id="loginForm" runat="server">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Bienvenido</h1>
+                <p>Ingresa tus credenciales para continuar</p>
+            </div>
+
+            <asp:Label ID="lblErrorMessage" runat="server" CssClass="error-message" Visible="false"></asp:Label>
+            
+            <div class="form-group">
+                <label for="txtEmail">Correo Electrónico</label>
+                <asp:TextBox 
+                    ID="txtEmail" 
+                    runat="server" 
+                    placeholder="tu@email.com"
+                    TextMode="Email"
+                    AutoCompleteType="Email">
+                </asp:TextBox>
+            </div>
+
+            <div class="form-group">
+                <label for="txtPassword">Contraseña</label>
+                <asp:TextBox 
+                    ID="txtPassword" 
+                    runat="server" 
+                    placeholder="••••••••" 
+                    TextMode="Password">
+                </asp:TextBox>
+            </div>
+
+            <asp:Button 
+                ID="btnLogin" 
+                runat="server" 
+                Text="Iniciar Sesión" 
+                OnClick="btnLogin_Click" 
+                CssClass="btn-login" />
+
+            <div class="forgot-password">
+                <a href="/forgot-password">¿Olvidaste tu contraseña?</a>
+            </div>
         </div>
-    <table style="width:100%;">
-        <tr>
-            <td class="auto-style5"></td>
-            <td class="auto-style11"></td>
-            <td class="auto-style7"></td>
-            <td class="auto-style8"></td>
-            <td class="auto-style6"></td>
-        </tr>
-        <tr>
-            <td class="auto-style1">&nbsp;</td>
-            <td class="auto-style4" colspan="3">
-                <asp:Label ID="lblTitle" runat="server" style="text-align: center" Text="Inicio de Sesión"></asp:Label>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style1">&nbsp;</td>
-            <td class="auto-style12">&nbsp;</td>
-            <td class="auto-style2">&nbsp;</td>
-            <td class="auto-style3">&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style1">&nbsp;</td>
-            <td class="auto-style10">
-                <asp:Label ID="lblUserId" runat="server" Text="Identificador Usuario"></asp:Label>
-            </td>
-            <td class="auto-style2">&nbsp;</td>
-            <td class="auto-style3">
-                <asp:TextBox ID="tbxUser" runat="server"></asp:TextBox>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style1">&nbsp;</td>
-            <td class="auto-style10">&nbsp;</td>
-            <td class="auto-style2">&nbsp;</td>
-            <td class="auto-style3">&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style5"></td>
-            <td class="auto-style11">
-                <asp:Label ID="lblPassword" runat="server" Text="Contrasena"></asp:Label>
-            </td>
-            <td class="auto-style7"></td>
-            <td class="auto-style8">
-                <asp:TextBox ID="tbxPassword" runat="server" TextMode="Password"></asp:TextBox>
-            </td>
-            <td class="auto-style6"></td>
-        </tr>
-        <tr>
-            <td class="auto-style1">&nbsp;</td>
-            <td class="auto-style12">&nbsp;</td>
-            <td class="auto-style2">&nbsp;</td>
-            <td class="auto-style3">&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style5"></td>
-            <td class="auto-style11">
-                <asp:Button ID="btnPasswdReset" runat="server" style="text-align: right" Text="Recuperar la Contrasena" />
-            </td>
-            <td class="auto-style7"></td>
-            <td class="auto-style8">
-                <asp:Button ID="btnLogin" runat="server" Text="Aceptar" Width="140px" OnClick="btnLogin_Click" />
-            </td>
-            <td class="auto-style6"></td>
-        </tr>
-        <tr>
-            <td class="auto-style5"></td>
-            <td class="auto-style11"></td>
-            <td class="auto-style7"></td>
-            <td class="auto-style8"></td>
-            <td class="auto-style6"></td>
-        </tr>
-        <tr>
-            <td class="auto-style5"></td>
-            <td class="auto-style11"></td>
-            <td class="auto-style7"></td>
-            <td class="auto-style8"></td>
-            <td class="auto-style6"></td>
-        </tr>
-        <tr>
-            <td class="auto-style5">&nbsp;</td>
-            <td class="newStyle1" colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Label ID="lblFailedLogIn" runat="server" ForeColor="Red" style="text-align: center" Text="Credenciales no Validos" Visible="False"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-            <td class="auto-style6">&nbsp;</td>
-        </tr>
-    </table>
     </form>
-    </body>
+</body>
 </html>

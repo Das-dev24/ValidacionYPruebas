@@ -25,7 +25,7 @@ namespace Practica.Model {
             this.Name = name;
             this.LastName = lastName;
             this.Email = email;
-            this.Password = Utils.Password.EncriptPassword(password);
+            this.Password = password;
             this.Is_Subscription = false;
             this.Is_superuser = false;
             this.State = UserState.Unactive;

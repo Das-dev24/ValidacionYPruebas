@@ -31,10 +31,10 @@
                     <td class="auto-style4">&nbsp;</td>
                     <td class="auto-style3">&nbsp;</td>
                     <td class="auto-style1">
-                        <asp:Button ID="btnProfile" runat="server" Text="Perfil" />
+                        <asp:Button ID="Button1" runat="server" Text="Perfil" OnClick="btnProfile_Click" />
                     </td>
                     <td>
-                        <asp:Button ID="btnLogOut" runat="server" Text="Salir" />
+                        <asp:Button ID="Button2" runat="server" Text="Salir" OnClick="btnLogOut_Click" />
                     </td>
                 </tr>
                 <tr>
