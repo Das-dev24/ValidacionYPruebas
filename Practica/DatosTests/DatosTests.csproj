@@ -69,6 +69,10 @@
       <Project>{DA42CE31-B7D2-40EF-A6AB-5D3565A2EEFF}</Project>
       <Name>Datos</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Practica\Practica.csproj">
+      <Project>{a637340f-116c-46a7-9408-1b819be639f6}</Project>
+      <Name>Practica</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
