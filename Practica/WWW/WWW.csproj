@@ -70,6 +70,9 @@
     <Content Include="LogIn.aspx" />
     <Content Include="Web.config" />
     <Content Include="MainView.aspx" />
+    <Content Include="Profile.aspx" />
+    <Content Include="AdminUsers.aspx" />
+    <Content Include="EditUser.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LogIn.aspx.cs">
@@ -86,6 +89,27 @@
     </Compile>
     <Compile Include="MainView.aspx.designer.cs">
       <DependentUpon>MainView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminUsers.aspx.cs">
+      <DependentUpon>AdminUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminUsers.aspx.designer.cs">
+      <DependentUpon>AdminUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditUser.aspx.cs">
+      <DependentUpon>EditUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditUser.aspx.designer.cs">
+      <DependentUpon>EditUser.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

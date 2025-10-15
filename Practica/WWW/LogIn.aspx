@@ -1,5 +1,4 @@
-﻿<%-- Esta línea es la corrección. Le dice a ASP.NET que use C# --%>
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="WWW.LogIn" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="WWW.LogIn" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -74,17 +73,27 @@
             outline: none;
             border-color: #667eea;
         }
-
-        .error-message {
-            background-color: #fee;
-            border: 1px solid #fcc;
-            color: #c33;
-            padding: 12px 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 14px;
+        
+        /* --- ESTILOS AÑADIDOS/MODIFICADOS --- */
+        /* Mensajes flotantes (esquina superior derecha) */
+        .message-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
         }
 
+        .alert {
+            padding: 15px;
+            border-radius: 6px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0.95;
+        }
+
+        .alert-danger { background-color: #dc3545; }
+        /* Se eliminó el antiguo estilo .error-message */
+        
         .btn-login {
             width: 100%;
             padding: 14px;
@@ -102,26 +111,41 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .forgot-password a:hover {
+            color: #764ba2;
+        }
     </style>
 </head>
 <body>
     <form id="loginForm" runat="server">
+        <!-- Contenedor para el mensaje de error flotante -->
+        <div class="message-container">
+            <asp:Label ID="lblErrorMessage" runat="server" EnableViewState="false" Visible="false"></asp:Label>
+        </div>
+
         <div class="login-container">
             <div class="login-header">
                 <h1>Bienvenido</h1>
                 <p>Ingresa tus credenciales para continuar</p>
             </div>
-
-            <asp:Label ID="lblErrorMessage" runat="server" CssClass="error-message" Visible="false"></asp:Label>
-            
             <div class="form-group">
                 <label for="txtEmail">Correo Electrónico</label>
                 <asp:TextBox 
                     ID="txtEmail" 
                     runat="server" 
                     placeholder="tu@email.com"
-                    TextMode="Email"
-                    AutoCompleteType="Email">
+                    TextMode="Email">
                 </asp:TextBox>
             </div>
 

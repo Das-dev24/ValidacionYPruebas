@@ -31,7 +31,6 @@ namespace Practica.Utils {
 
         public static bool VerifyPassword(string password, string storedHash){
             string hashIngresado = EncriptPassword(password);
-            
             return hashIngresado.Equals(storedHash);
         }
 

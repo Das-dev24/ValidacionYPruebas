@@ -47,15 +47,15 @@ namespace Practica.Model {
 
         public void ChangePassword(string existingPassword, string newPassword) {
             if (string.IsNullOrEmpty(existingPassword) || string.IsNullOrEmpty(newPassword)) {
-                throw new ArgumentNullException("Passwords cannot be empty.");
+                throw new ArgumentException("Las contraseñas no pueden estar vacías.");
             }
 
             if (!Utils.Password.VerifyPassword(existingPassword, this.password)) {
-                throw new InvalidOperationException("The existing password is not correct.");
+                throw new InvalidOperationException("La contraseña actual no es correcta.");
             }
 
             if (!Utils.Password.CheckPassword(newPassword)) {
-                throw new ArgumentException("The new password does not meet the security requirements.");
+                throw new ArgumentException("La nueva contraseña no cumple los requisitos de seguridad.");
             }
 
             Password = newPassword;
@@ -70,14 +70,17 @@ namespace Practica.Model {
 
         public void ChangeDetails(String name, String lastName, String email) {
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email)) {
-                throw new ArgumentNullException("Name, last name, and email cannot be empty.");
+                throw new ArgumentException("El nombre, apellidos y email no pueden estar vacíos.");
+            }
+            // Ahora lanza una excepción si el formato es inválido
+            if (!Utils.Email.IsValidFormat(email)) {
+                throw new ArgumentException("El formato del email no es válido.");
             }
 
-            if (Utils.Email.IsValidFormat(email)) {
-                Name = name;
-                LastName = lastName;
-                Email = email;
-            }
+            // Si todo está bien, actualiza las propiedades
+            Name = name;
+            LastName = lastName;
+            Email = email;
         }
 
         public void Subscribe() {
