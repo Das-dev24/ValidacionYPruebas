@@ -1,18 +1,32 @@
 ﻿using Database;
+using Datos.Seeder;
 using Practica.Model;
+using Practica.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Practica.Utils;
 
 namespace Datos {
     public class CapaDatos : ICapaDatos {
 
         private List<User> Users = new List<User>();
         private List<Activity> Activities = new List<Activity>();
+
+        public CapaDatos() {
+            SeedData();
+        }
+
+        public List<User> GetAllUsers() {
+            return Users;
+        }
+
+        private void SeedData() {
+            var seeder = new DatabaseSeeder(this);
+            seeder.Seed();
+        }
 
         public bool GuardaUser(User u) {
             if (Users.Contains(u)) {
@@ -41,15 +55,16 @@ namespace Datos {
             return contador;
         }
 
-        public bool ValidaUser(string email, string password){
+        public bool ValidaUser(string email, string password) {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
-                throw new ArgumentNullException("Email and password cannot be empty.");
+                throw new ArgumentNullException("El email y la contraseña no pueden estar vacíos.");
             }
 
-            if (!Password.VerifyPassword(password, LeeUser(email).Password) || LeeUser(email) == null) {
-                throw new InvalidOperationException("Incorrect combination of email and password.");
-            }
             User usuario = LeeUser(email);
+
+            if (usuario == null || !Password.VerifyPassword(password, usuario.Password)) {
+                throw new InvalidOperationException("La combinación de email y contraseña es incorrecta." + password + "\t" + usuario.Password);
+            }
 
             usuario.State = UserState.Active;
             usuario.Last_login = DateTime.Now;

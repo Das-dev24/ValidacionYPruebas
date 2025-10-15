@@ -96,7 +96,7 @@ namespace Practica.Model.Tests {
         [DataRow("test@example.com", "wrong_password", typeof(InvalidOperationException), "Login debería fallar con contraseña incorrecta.")]
         [DataRow("wrong@example.com", "test_password", typeof(InvalidOperationException), "Login debería fallar con email incorrecto.")]
         [DataRow("test@example.com", null, typeof(ArgumentNullException), "Login debería fallar con contraseña nula.")]
-        [DataRow(null, "test_password", typeof(ArgumentNullException), "Login debería fallar con email nulo.")]
+        [DataRow(null, "test_password", typeof(ArgumentNullException), "Login debería fallar con email nulo.")] 
         public void LoginTest_Failure(string loginEmail, string loginPassword, Type exceptionType, string message) {
             // Arrange
             User user = new User("Test", "User", "test@example.com", "test_password");
