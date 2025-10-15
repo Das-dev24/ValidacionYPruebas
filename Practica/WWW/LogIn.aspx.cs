@@ -1,16 +1,8 @@
 ﻿using Datos;
-using Practica.Model;
-using Practica.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WWW {
     public partial class LogIn : System.Web.UI.Page {
-        private User AuthorizedUser;
 
         private CapaDatos Data {
             get {
@@ -24,7 +16,6 @@ namespace WWW {
         }
 
         protected void Page_Load(object sender, EventArgs e) {
-            AuthorizedUser = null;
             lblErrorMessage.Visible = false;
         }
 
@@ -37,6 +28,7 @@ namespace WWW {
                 }
             } catch (Exception ex) {
                 lblErrorMessage.Text = ex.Message;
+                lblErrorMessage.CssClass = "alert alert-danger";
                 lblErrorMessage.Visible = true;
             }
         }

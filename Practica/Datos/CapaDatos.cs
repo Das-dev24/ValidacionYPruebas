@@ -19,13 +19,13 @@ namespace Datos {
             SeedData();
         }
 
-        public List<User> GetAllUsers() {
-            return Users;
-        }
-
         private void SeedData() {
             var seeder = new DatabaseSeeder(this);
             seeder.Seed();
+        }
+
+        public List<User> GetAllUsers() {
+            return Users;
         }
 
         public bool GuardaUser(User u) {
@@ -37,8 +37,22 @@ namespace Datos {
             }
         }
 
+        public bool DeleteUser(User userToDelete) {
+            if (userToDelete == null) {
+                return false;
+            }
+
+            Activities.RemoveAll(activity => activity.GetUser() == userToDelete);
+
+            return Users.Remove(userToDelete);
+        }
+
         public User LeeUser(string email) {
             return Users.FirstOrDefault(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public User LeeUserPorId(int userId) {
+            return Users.FirstOrDefault(u => u.Id == userId);
         }
 
         public int NumUsers() {
@@ -57,13 +71,13 @@ namespace Datos {
 
         public bool ValidaUser(string email, string password) {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
-                throw new ArgumentNullException("El email y la contraseña no pueden estar vacíos.");
+                throw new ArgumentNullException("El email o la contraseña no pueden estar vacíos.");
             }
 
             User usuario = LeeUser(email);
 
             if (usuario == null || !Password.VerifyPassword(password, usuario.Password)) {
-                throw new InvalidOperationException("La combinación de email y contraseña es incorrecta." + password + "\t" + usuario.Password);
+                throw new InvalidOperationException("La combinación de email y contraseña es incorrecta.");
             }
 
             usuario.State = UserState.Active;
@@ -73,7 +87,7 @@ namespace Datos {
 
         public void Register(string name, string lastName, string email, string password) {
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
-                throw new ArgumentNullException("All fields must be filled out for registration.");
+                throw new ArgumentException("All fields must be filled out for registration.");
             }
             if (!Password.CheckPassword(password) || LeeUser(email) != null  || !Email.IsValidFormat(email)) {
                 throw new ArgumentException("Password does not meet requirements or email is invalid.");
@@ -83,7 +97,6 @@ namespace Datos {
             usuario.Id = NumUsers() + 1;
             GuardaUser(usuario);
         }
-
 
         public bool GuardaActivity(Activity e) {
             if (Activities.Contains(e)) {
