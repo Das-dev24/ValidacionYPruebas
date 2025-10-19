@@ -5,36 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using Practica.Model;
 
-namespace Practica.Model
-
-{
-    public class ActivitySwimming : Activity
-    {
+namespace Practica.Model {
+    public class ActivitySwimming : Activity {
         private int distance;
-
         private string place;
 
-
         public ActivitySwimming(User user, string name, string typeActivity, DateTime start, int duration, string notes, string place, int distance)
-            : base(user, name, typeActivity, start, duration, notes)
-        {
+            : base(user, name, typeActivity, start, duration, notes) {
             base.TypeActivity = "Natación";
             this.place = place;
             this.distance = distance;
 
-            if (distance < 0f)
-            {
+            if (distance < 0f) {
                 throw new ArgumentException("La distancia en natación no puede ser negativa.");
             }
 
-            if(duration <= 0f)
-            {
+            if (duration <= 0f) {
                 throw new ArgumentException("La duración debe ser mayor que cero.");
             }
 
         }
-        public override string ObtainActivity()
-        {
+
+        public override string ObtainActivity() {
             return "Natación en " + this.place + " de " + this.distance + " m en " + base.Duration + " mins";
         }
     }

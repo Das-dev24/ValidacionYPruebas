@@ -7,7 +7,6 @@ using System.Web.UI.WebControls;
 
 namespace WWW {
     public partial class AdminUsers : System.Web.UI.Page {
-        // Asume que tienes acceso a tu capa de datos aquí
         private CapaDatos Data {
             get {
                 CapaDatos data = (CapaDatos)Application["datos"];
@@ -43,7 +42,7 @@ namespace WWW {
 
         protected void btnAddUser_Click(object sender, EventArgs e) {
             // Redirige a una página para crear un nuevo usuario
-            Response.Redirect("CreateUser.aspx");
+            Response.Redirect("AddUser.aspx");
         }
 
         protected void rptUsers_ItemCommand(object source, RepeaterCommandEventArgs e) {

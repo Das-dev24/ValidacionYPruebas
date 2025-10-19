@@ -52,6 +52,12 @@ namespace Datos.Seeder {
             new ActivityRunning(userJuan, "Carrera por el río", null, new DateTime(2025, 10, 10, 8, 0, 0), 45, "Mañana fresca, buen ritmo.", "Paseo de la Isla", 8.5f, 25),
             new ActivitySwimming(userJuan, "Nado en piscina", null, new DateTime(2025, 10, 11, 19, 30, 0), 60, "Piscina concurrida.", "Piscina Municipal San Amaro", 2000),
 
+            new ActividadCycling(userJuan, "Ruta a Fuentes Blancas", null, new DateTime(2025, 10, 12, 10, 0, 0), 120, "Día soleado perfecto para rodar.", "Fuentes Blancas", 40.0f, 150),
+            new ActivityGym(userJuan, "Sesión de pierna", null, new DateTime(2025, 10, 13, 18, 0, 0), 75, "Entrenamiento intenso.", 550, "Tren inferior"),
+
+            new ActivityRunning(userAna, "Carrera por el río", null, new DateTime(2025, 10, 10, 8, 0, 0), 45, "Mañana fresca, buen ritmo.", "Paseo de la Isla", 8.5f, 25),
+            new ActivitySwimming(userAna, "Nado en piscina", null, new DateTime(2025, 10, 11, 19, 30, 0), 60, "Piscina concurrida.", "Piscina Municipal San Amaro", 2000),
+
             new ActividadCycling(userAna, "Ruta a Fuentes Blancas", null, new DateTime(2025, 10, 12, 10, 0, 0), 120, "Día soleado perfecto para rodar.", "Fuentes Blancas", 40.0f, 150),
             new ActivityGym(userAna, "Sesión de pierna", null, new DateTime(2025, 10, 13, 18, 0, 0), 75, "Entrenamiento intenso.", 550, "Tren inferior")
             };

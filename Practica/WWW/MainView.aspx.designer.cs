@@ -10,7 +10,7 @@
 namespace WWW {
 
 
-    public partial class WebForm1 {
+    public partial class MainView {
 
         /// <summary>
         /// Control form1.
@@ -47,5 +47,32 @@ namespace WWW {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnLogOut;
+
+        /// <summary>
+        /// Control btnAddActivity.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddActivity;
+
+        /// <summary>
+        /// Control rptActivities.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptActivities;
+
+        /// <summary>
+        /// Control pnlNoActivities.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlNoActivities;
     }
 }

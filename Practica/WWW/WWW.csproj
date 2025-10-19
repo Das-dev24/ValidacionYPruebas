@@ -67,14 +67,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddUser.aspx" />
     <Content Include="LogIn.aspx" />
     <Content Include="Web.config" />
     <Content Include="MainView.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="AdminUsers.aspx" />
     <Content Include="EditUser.aspx" />
+    <Content Include="AddActivity.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddUser.aspx.cs">
+      <DependentUpon>AddUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddUser.aspx.designer.cs">
+      <DependentUpon>AddUser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LogIn.aspx.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -110,6 +119,13 @@
     </Compile>
     <Compile Include="EditUser.aspx.designer.cs">
       <DependentUpon>EditUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddActivity.aspx.cs">
+      <DependentUpon>AddActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddActivity.aspx.designer.cs">
+      <DependentUpon>AddActivity.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

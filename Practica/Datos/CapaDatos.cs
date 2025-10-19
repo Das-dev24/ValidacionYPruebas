@@ -85,17 +85,29 @@ namespace Datos {
             return true;
         }
 
-        public void Register(string name, string lastName, string email, string password) {
+        public void Register(string name, string lastName, string email, string password, bool isSuperUser = false) {
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
-                throw new ArgumentException("All fields must be filled out for registration.");
+                throw new ArgumentException("Todos los campos son obligatorios.");
             }
-            if (!Password.CheckPassword(password) || LeeUser(email) != null  || !Email.IsValidFormat(email)) {
-                throw new ArgumentException("Password does not meet requirements or email is invalid.");
+            if (LeeUser(email) != null) {
+                throw new ArgumentException("El correo electrónico ya está en uso.");
+            }
+            if (!Email.IsValidFormat(email)) {
+                throw new ArgumentException("El formato del correo electrónico no es válido.");
+            }
+            if (!Password.CheckPassword(password)) {
+                throw new ArgumentException("La contraseña no cumple con los requisitos de seguridad.");
             }
 
             User usuario = new User(name, lastName, email, password);
             usuario.Id = NumUsers() + 1;
+            usuario.Is_superuser = isSuperUser;
+
             GuardaUser(usuario);
+        }
+
+        public List<Activity> GetActivitiesForUser(int userId) {
+            return Activities.Where(a => a.GetUser() != null && a.GetUser().Id == userId).ToList();
         }
 
         public bool GuardaActivity(Activity e) {

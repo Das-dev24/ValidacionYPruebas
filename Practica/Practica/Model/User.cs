@@ -5,7 +5,6 @@ namespace Practica.Model {
 
     public enum UserState { Active, Unactive, Blocked };
 
-    // Mirar a futuro Notificación de Cambios (implementar la interfaz INotifyPropertyChanged)
     public class User {
 
         public int Id { get; set; }
