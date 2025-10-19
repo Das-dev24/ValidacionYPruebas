@@ -59,16 +59,6 @@ namespace Datos {
             return Users.Count;
         }
 
-        public int NumUsersActivos() {
-            int contador = 0;
-            for (int i = 0; i < Users.Count; i++) {
-                if (Users[i].State == UserState.Active) {
-                    contador++;
-                }
-            }
-            return contador;
-        }
-
         public bool ValidaUser(string email, string password) {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
                 throw new ArgumentNullException("El email o la contraseña no pueden estar vacíos.");
@@ -117,26 +107,6 @@ namespace Datos {
                 Activities.Add(e);
                 return true;
             }
-        }
-
-        public Activity LeeActivity(int idElemento) {
-            if (idElemento < 0 || idElemento >= Activities.Count) {
-                return null;
-            } else {
-                return Activities[idElemento];
-            }
-        }
-
-        public int NumActivityes(int idUser) {
-            int contador = 0;
-
-            for (int i = 0; i < Activities.Count; i++) {
-                if (Activities[i].GetUser().Id == idUser) {
-                    contador++;
-                }
-            }
-
-            return contador;
         }
     }
 }

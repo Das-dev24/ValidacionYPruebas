@@ -26,7 +26,6 @@ namespace Practica.Model {
                 throw new ArgumentException("La duración debe ser mayor que cero.");
             }
 
-
         }
 
         public override string ObtainActivity() {

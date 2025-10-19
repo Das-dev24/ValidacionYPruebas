@@ -31,19 +31,6 @@ namespace Practica.Model {
             this.Last_login = DateTime.Now;
         }
 
-        public void Login(string email, string password) {
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
-                throw new ArgumentNullException("Email and password cannot be empty.");
-            }
-
-            if (!Utils.Password.VerifyPassword(password, this.password) || !this.Email.Equals(email)) {
-                throw new InvalidOperationException("Incorrect email or password.");
-            }
-
-            this.State = UserState.Active;
-            this.Last_login = DateTime.Now;
-        }
-
         public void ChangePassword(string existingPassword, string newPassword) {
             if (string.IsNullOrEmpty(existingPassword) || string.IsNullOrEmpty(newPassword)) {
                 throw new ArgumentException("Las contraseñas no pueden estar vacías.");
@@ -60,13 +47,6 @@ namespace Practica.Model {
             Password = newPassword;
         }
 
-        public void Logout() {
-            if (this.State != UserState.Active) {
-                throw new InvalidOperationException("Cannot log out when the user is not active.");
-            }
-            this.State = UserState.Unactive;
-        }
-
         public void ChangeDetails(String name, String lastName, String email) {
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email)) {
                 throw new ArgumentException("El nombre, apellidos y email no pueden estar vacíos.");
@@ -80,31 +60,6 @@ namespace Practica.Model {
             Name = name;
             LastName = lastName;
             Email = email;
-        }
-
-        public void Subscribe() {
-            if (this.Is_Subscription) {
-                throw new InvalidOperationException("The user is already subscribed.");
-            }
-            this.Is_Subscription = true;
-        }
-
-        public void Unsubscribe() {
-            this.Is_Subscription = false;
-        }
-
-        public void Block() {
-            if (this.State == UserState.Blocked) {
-                throw new InvalidOperationException("El usuario ya se encuentra bloqueado.");
-            }
-            this.State = UserState.Blocked;
-        }
-
-        public void Unblock() {
-            if (this.State != UserState.Blocked) {
-                throw new InvalidOperationException("El usuario no está bloqueado.");
-            }
-            this.State = UserState.Unactive;
         }
 
         public override bool Equals(object obj) {

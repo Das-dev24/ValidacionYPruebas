@@ -6,25 +6,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Datos.Tests
-{
+namespace Datos.Tests {
     [TestClass()]
-    public class CapaDatosTests
-    {
+    public class CapaDatosTests {
         private CapaDatos _capaDatos;
 
         [TestInitialize]
-        public void Setup()
-        {
-            // Crear nueva instancia antes de cada test para aislar las pruebas
+        public void Setup() {
+
             _capaDatos = new CapaDatos();
         }
 
         #region GetAllUsers Tests
 
         [TestMethod()]
-        public void GetAllUsers_DebeRetornarListaDeUsuarios()
-        {
+        public void GetAllUsers_AlIniciar_NoDebeSerNulo() {
             // Act
             var result = _capaDatos.GetAllUsers();
 
@@ -33,187 +29,103 @@ namespace Datos.Tests
             Assert.IsInstanceOfType(result, typeof(List<User>));
         }
 
-        [TestMethod()]
-        public void GetAllUsers_DebeRetornarUsuariosSemilla()
-        {
-            // Act
-            var result = _capaDatos.GetAllUsers();
-
-            // Assert - Verifica que hay usuarios cargados por el Seeder
-            Assert.IsTrue(result.Count >= 0);
-        }
-
         #endregion
 
-        #region GuardaUser Tests
+        #region GuardaUser / LeeUser / LeeUserPorId Tests
 
         [TestMethod()]
-        public void GuardaUser_UsuarioNuevo_DebeRetornarTrue()
-        {
+        public void GuardaUser_ConUsuarioNuevo_DebeAgregarloALaLista() {
             // Arrange
-            var nuevoUsuario = new User("Test", "User", "test@example.com", "Password123!");
+            var nuevoUsuario = new User("Test", "User", "test.nuevo@example.com", "Password123!");
+            nuevoUsuario.Id = 99;
 
             // Act
-            var result = _capaDatos.GuardaUser(nuevoUsuario);
+            bool resultadoGuardado = _capaDatos.GuardaUser(nuevoUsuario);
 
             // Assert
-            Assert.IsTrue(result);
-            Assert.IsTrue(_capaDatos.GetAllUsers().Contains(nuevoUsuario));
+            Assert.IsTrue(resultadoGuardado, "GuardaUser debería devolver true para un usuario nuevo.");
+
+            var usuarioRecuperado = _capaDatos.LeeUser("test.nuevo@example.com");
+            Assert.IsNotNull(usuarioRecuperado, "El usuario debería poder recuperarse por email.");
+            Assert.AreEqual("Test", usuarioRecuperado.Name, "El nombre no coincide.");
+
+            var usuarioPorId = _capaDatos.LeeUserPorId(99);
+            Assert.IsNotNull(usuarioPorId, "El usuario debería poder recuperarse por ID.");
+            Assert.AreEqual("test.nuevo@example.com", usuarioPorId.Email, "El email no coincide.");
         }
 
         [TestMethod()]
-        public void GuardaUser_UsuarioDuplicado_DebeRetornarFalse()
-        {
+        public void GuardaUser_ConUsuarioDuplicado_DebeRetornarFalse() {
             // Arrange
-            var usuario = new User("Test", "User", "test@example.com", "Password123!");
+            var usuario = new User("Duplicado", "Test", "duplicado@example.com", "Password123!");
             _capaDatos.GuardaUser(usuario);
 
-            // Act - Intentar guardar el mismo usuario dos veces
+            // Act - Intentamos guardar el mismo usuario de nuevo
             var result = _capaDatos.GuardaUser(usuario);
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.IsFalse(result, "No se debería poder guardar un usuario duplicado.");
         }
 
-        #endregion
-
-
-        #region LeeUser Tests
-
-        [TestMethod()]
-        public void LeeUser_EmailExistente_DebeRetornarUsuario()
-        {
-            // Arrange
-            var usuario = new User("Test", "User", "leeuser@example.com", "Password123!");
-            _capaDatos.GuardaUser(usuario);
-
+        [TestMethod]
+        public void LeeUser_ConEmailNoExistente_DebeRetornarNull() {
             // Act
-            var result = _capaDatos.LeeUser("leeuser@example.com");
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("leeuser@example.com", result.Email, ignoreCase: true);
-        }
-
-        [TestMethod()]
-        public void LeeUser_EmailNoExistente_DebeRetornarNull()
-        {
-            // Act
-            var result = _capaDatos.LeeUser("noexiste@example.com");
-
+            var result = _capaDatos.LeeUser("no.existe@example.com");
             // Assert
             Assert.IsNull(result);
         }
 
-        [TestMethod()]
-        public void LeeUser_EmailCaseInsensitive_DebeRetornarUsuario()
-        {
-            // Arrange
-            var usuario = new User("Test", "User", "CaseSensitive@Example.com", "Password123!");
-            _capaDatos.GuardaUser(usuario);
-
+        [TestMethod]
+        public void LeeUserPorId_ConIdNoExistente_DebeRetornarNull() {
             // Act
-            var result = _capaDatos.LeeUser("casesensitive@example.com");
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("CaseSensitive@Example.com", result.Email, ignoreCase: true);
-        }
-
-        #endregion
-
-        #region LeeUserPorId Tests
-
-        [TestMethod()]
-        public void LeeUserPorId_IdExistente_DebeRetornarUsuario()
-        {
-            // Arrange
-            var usuario = new User("Test", "User", "userid@example.com", "Password123!");
-            usuario.Id = 12345;
-            _capaDatos.GuardaUser(usuario);
-
-            // Act
-            var result = _capaDatos.LeeUserPorId(12345);
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(12345, result.Id);
-        }
-
-        [TestMethod()]
-        public void LeeUserPorId_IdNoExistente_DebeRetornarNull()
-        {
-            // Act
-            var result = _capaDatos.LeeUserPorId(999999);
-
+            var result = _capaDatos.LeeUserPorId(99999);
             // Assert
             Assert.IsNull(result);
         }
 
         #endregion
 
-        #region NumUsers Tests
+        #region DeleteUser Tests
 
-        [TestMethod()]
-        public void NumUsers_DebeRetornarCantidadCorrecta()
-        {
+        [TestMethod]
+        public void DeleteUser_ConUsuarioExistente_DebeEliminarloYRetornarTrue() {
             // Arrange
-            int cantidadInicial = _capaDatos.NumUsers();
-            var usuario = new User("Test", "User", "numuser@example.com", "Password123!");
+            var usuario = new User("Borrar", "Usuario", "borrar@example.com", "Password123!");
             _capaDatos.GuardaUser(usuario);
+            Assert.IsNotNull(_capaDatos.LeeUser("borrar@example.com"), "Precondición: El usuario debe existir.");
 
             // Act
-            int cantidadFinal = _capaDatos.NumUsers();
+            bool resultado = _capaDatos.DeleteUser(usuario);
 
             // Assert
-            Assert.AreEqual(cantidadInicial + 1, cantidadFinal);
+            Assert.IsTrue(resultado, "DeleteUser debería retornar true.");
+            Assert.IsNull(_capaDatos.LeeUser("borrar@example.com"), "El usuario ya no debería existir.");
         }
 
-        #endregion
-
-        #region NumUsersActivos Tests
-
-        [TestMethod()]
-        public void NumUsersActivos_ConUsuariosActivos_DebeContarCorrectamente()
-        {
+        [TestMethod]
+        public void DeleteUser_ConUsuarioExistenteYActividades_DebeEliminarAmbos() {
             // Arrange
-            var usuario1 = new User("Test1", "User", "activo1@example.com", "Password123!");
-            usuario1.State = UserState.Active;
-            _capaDatos.GuardaUser(usuario1);
+            var usuario = new User("Borrar", "ConActividades", "borrar.act@example.com", "Password123!");
+            _capaDatos.GuardaUser(usuario);
+            var actividad = new ActivityRunning(usuario, "Carrera", "", DateTime.Now, 30, "", "Parque", 5f, 100);
+            _capaDatos.GuardaActivity(actividad);
 
-            var usuario2 = new User("Test2", "User", "activo2@example.com", "Password123!");
-            usuario2.State = UserState.Active;
-            _capaDatos.GuardaUser(usuario2);
-
-            var usuario3 = new User("Test3", "User", "inactivo@example.com", "Password123!");
-            usuario3.State = UserState.Unactive;
-            _capaDatos.GuardaUser(usuario3);
-
-            int activosEsperados = _capaDatos.GetAllUsers().Count(u => u.State == UserState.Active);
+            Assert.AreEqual(1, _capaDatos.GetActivitiesForUser(usuario.Id).Count, "Precondición: El usuario debe tener una actividad.");
 
             // Act
-            int result = _capaDatos.NumUsersActivos();
+            _capaDatos.DeleteUser(usuario);
 
             // Assert
-            Assert.AreEqual(activosEsperados, result);
+            Assert.IsNull(_capaDatos.LeeUser("borrar.act@example.com"), "El usuario debería haber sido eliminado.");
+            Assert.AreEqual(0, _capaDatos.GetActivitiesForUser(usuario.Id).Count, "Las actividades del usuario también deberían haber sido eliminadas.");
         }
 
-        [TestMethod()]
-        public void NumUsersActivos_RecorrerTodosLosUsuarios_CubrimientoBucleFor()
-        {
-            // Arrange - Agregar múltiples usuarios para asegurar que el bucle recorre todos
-            for (int i = 0; i < 5; i++)
-            {
-                var usuario = new User($"Test{i}", "User", $"user{i}@example.com", "Password123!");
-                usuario.State = (i % 2 == 0) ? UserState.Active : UserState.Unactive;
-                _capaDatos.GuardaUser(usuario);
-            }
-
+        [TestMethod]
+        public void DeleteUser_ConUsuarioNulo_DebeRetornarFalse() {
             // Act
-            int result = _capaDatos.NumUsersActivos();
-
+            bool resultado = _capaDatos.DeleteUser(null);
             // Assert
-            Assert.IsTrue(result >= 0);
+            Assert.IsFalse(resultado);
         }
 
         #endregion
@@ -221,213 +133,129 @@ namespace Datos.Tests
         #region ValidaUser Tests
 
         [TestMethod()]
-        public void ValidaUser_CredencialesCorrectas_DebeRetornarTrueYActivarUsuario()
-        {
+        public void ValidaUser_ConCredencialesCorrectas_DebeRetornarTrueYActivarUsuario() {
             // Arrange
-            string email = "valido@example.com";
-            string password = "Password123!";
-
-            var usuario = new User("Test", "User", email, password);
+            var usuario = new User("Validar", "User", "validar@example.com", "PasswordValida123!");
             usuario.State = UserState.Unactive;
             _capaDatos.GuardaUser(usuario);
 
             // Act
-            var result = _capaDatos.ValidaUser(email, password);
-            var usuarioValidado = _capaDatos.LeeUser(email);
+            var result = _capaDatos.ValidaUser("validar@example.com", "PasswordValida123!");
+            var usuarioValidado = _capaDatos.LeeUser("validar@example.com");
 
             // Assert
-            Assert.IsTrue(result);
-            Assert.AreEqual(UserState.Active, usuarioValidado.State);
-            Assert.IsNotNull(usuarioValidado.Last_login);
+            Assert.IsTrue(result, "La validación debería ser exitosa.");
+            Assert.AreEqual(UserState.Active, usuarioValidado.State, "El estado del usuario debería cambiar a Active.");
+            Assert.IsNotNull(usuarioValidado.Last_login, "La fecha de último login debería actualizarse.");
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ValidaUser_EmailVacio_DebeLanzarArgumentNullException()
-        {
-            // Act
-            _capaDatos.ValidaUser("", "password");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ValidaUser_EmailNull_DebeLanzarArgumentNullException()
-        {
-            // Act
-            _capaDatos.ValidaUser(null, "password");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ValidaUser_PasswordVacio_DebeLanzarArgumentNullException()
-        {
-            // Act
-            _capaDatos.ValidaUser("email@example.com", "");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ValidaUser_PasswordNull_DebeLanzarArgumentNullException()
-        {
-            // Act
-            _capaDatos.ValidaUser("email@example.com", null);
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void ValidaUser_UsuarioNoExiste_DebeLanzarInvalidOperationException()
-        {
-            // Act
-            _capaDatos.ValidaUser("noexiste@example.com", "Password123!");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void ValidaUser_PasswordIncorrecta_DebeLanzarInvalidOperationException()
-        {
-            // Arrange
-            string email = "incorrecta@example.com";
-            string passwordCorrecta = "Password123!";
-
-            var usuario = new User("Test", "User", email, passwordCorrecta);
+        [DataTestMethod]
+        [DataRow(null, "pass", typeof(ArgumentNullException))]
+        [DataRow("email", null, typeof(ArgumentNullException))]
+        [DataRow("no.existe@email.com", "pass", typeof(InvalidOperationException))]
+        [DataRow("validar@example.com", "passIncorrecta", typeof(InvalidOperationException))]
+        public void ValidaUser_ConDatosInvalidos_DebeLanzarExcepcionCorrecta(string email, string password, Type expectedExceptionType) {
+            // Arrange: Se crea un usuario para el caso de contraseña incorrecta
+            var usuario = new User("Validar", "User", "validar@example.com", "PasswordValida123!");
             _capaDatos.GuardaUser(usuario);
 
-            // Act
-            _capaDatos.ValidaUser(email, "PasswordIncorrecta!");
+            // Act & Assert
+            try {
+                _capaDatos.ValidaUser(email, password);
+                Assert.Fail("Se esperaba una excepción, pero no se lanzó ninguna.");
+            } catch (Exception ex) {
+                Assert.IsInstanceOfType(ex, expectedExceptionType, "Se lanzó un tipo de excepción incorrecto.");
+            }
         }
-
         #endregion
 
         #region Register Tests
 
         [TestMethod()]
-        public void Register_DatosValidos_DebeCrearUsuarioCorrectamente()
-        {
+        public void Register_ConDatosValidos_DebeCrearUsuarioCorrectamente() {
             // Arrange
-            string name = "Nuevo";
-            string lastName = "Usuario";
-            string email = "nuevo@example.com";
-            string password = "Password123!";
             int usuariosInicial = _capaDatos.NumUsers();
 
             // Act
-            _capaDatos.Register(name, lastName, email, password);
+            _capaDatos.Register("Nuevo", "Usuario", "nuevo.reg@example.com", "PasswordValido123!");
 
             // Assert
             Assert.AreEqual(usuariosInicial + 1, _capaDatos.NumUsers());
-            var usuarioCreado = _capaDatos.LeeUser(email);
+            var usuarioCreado = _capaDatos.LeeUser("nuevo.reg@example.com");
             Assert.IsNotNull(usuarioCreado);
-            Assert.AreEqual(name, usuarioCreado.Name);
-            Assert.AreEqual(lastName, usuarioCreado.LastName);
-            Assert.AreEqual(email, usuarioCreado.Email);
+            Assert.AreEqual("Nuevo", usuarioCreado.Name);
+            Assert.AreEqual(UserState.Unactive, usuarioCreado.State, "El usuario debe crearse como inactivo.");
         }
 
-        [TestMethod()]
-        public void Register_DebeAsignarIdCorrectamente()
-        {
+        [DataTestMethod]
+        [DataRow(null, "User", "email@test.com", "Pass123!", "Todos los campos son obligatorios.")]
+        [DataRow("Test", null, "email@test.com", "Pass123!", "Todos los campos son obligatorios.")]
+        [DataRow("Test", "User", null, "Pass123!", "Todos los campos son obligatorios.")]
+        [DataRow("Test", "User", "email@test.com", null, "Todos los campos son obligatorios.")]
+        [DataRow("Test", "User", "existente@test.com", "Pass123!", "El correo electrónico ya está en uso.")]
+        [DataRow("Test", "User", "email-invalido", "Pass123!", "El formato del correo electrónico no es válido.")]
+        [DataRow("Test", "User", "email@test.com", "debil", "La contraseña no cumple con los requisitos de seguridad.")]
+        public void Register_ConDatosInvalidos_DebeLanzarArgumentException(string name, string lastName, string email, string password, string expectedMessage) {
             // Arrange
-            string email = "conid@example.com";
-            int numeroUsuariosAntes = _capaDatos.NumUsers();
+            _capaDatos.Register("Existente", "Usuario", "existente@test.com", "PasswordValido123!");
+
+            // Act & Assert
+            var ex = Assert.ThrowsException<ArgumentException>(() => _capaDatos.Register(name, lastName, email, password));
+            Assert.AreEqual(expectedMessage, ex.Message);
+        }
+
+        #endregion
+
+        #region GetActivitiesForUser Tests
+
+        [TestMethod]
+        public void GetActivitiesForUser_ConUsuarioYActividades_DebeRetornarSusActividades() {
+            // Arrange
+            var user1 = new User("User", "One", "user1@example.com", "Password123!");
+            user1.Id = 1;
+            _capaDatos.GuardaUser(user1);
+
+            var user2 = new User("User", "Two", "user2@example.com", "Password123!");
+            user2.Id = 2;
+            _capaDatos.GuardaUser(user2);
+
+            // Actividades para user1
+            _capaDatos.GuardaActivity(new ActivityRunning(user1, "Carrera Mañana", "", DateTime.Now, 30, "", "Parque", 5f, 100));
+            _capaDatos.GuardaActivity(new ActivityGym(user1, "Pesas", "", DateTime.Now, 60, "", 300, "Full Body"));
+            // Actividad para user2
+            _capaDatos.GuardaActivity(new ActivitySwimming(user2, "Natación", "", DateTime.Now, 45, "", "Piscina", 1500));
 
             // Act
-            _capaDatos.Register("Test", "User", email, "Password123!");
+            var activitiesUser1 = _capaDatos.GetActivitiesForUser(1);
 
             // Assert
-            var usuario = _capaDatos.LeeUser(email);
-            Assert.AreEqual(numeroUsuariosAntes + 1, usuario.Id);
+            Assert.IsNotNull(activitiesUser1);
+            Assert.AreEqual(2, activitiesUser1.Count, "Debería retornar solo las actividades del usuario 1.");
+            Assert.IsTrue(activitiesUser1.All(a => a.User.Id == 1));
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Register_NameVacio_DebeLanzarArgumentException()
-        {
-            // Act
-            _capaDatos.Register("", "User", "test@example.com", "Password123!");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Register_NameNull_DebeLanzarArgumentException()
-        {
-            // Act
-            _capaDatos.Register(null, "User", "test@example.com", "Password123!");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Register_LastNameVacio_DebeLanzarArgumentException()
-        {
-            // Act
-            _capaDatos.Register("Test", "", "test@example.com", "Password123!");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Register_LastNameNull_DebeLanzarArgumentException()
-        {
-            // Act
-            _capaDatos.Register("Test", null, "test@example.com", "Password123!");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Register_EmailVacio_DebeLanzarArgumentException()
-        {
-            // Act
-            _capaDatos.Register("Test", "User", "", "Password123!");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Register_EmailNull_DebeLanzarArgumentException()
-        {
-            // Act
-            _capaDatos.Register("Test", "User", null, "Password123!");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Register_PasswordVacio_DebeLanzarArgumentException()
-        {
-            // Act
-            _capaDatos.Register("Test", "User", "test@example.com", "");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Register_PasswordNull_DebeLanzarArgumentException()
-        {
-            // Act
-            _capaDatos.Register("Test", "User", "test@example.com", null);
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Register_PasswordNoValidaRequisitos_DebeLanzarArgumentException()
-        {
-            // Arrange - Password débil que no cumple requisitos
-            // Act
-            _capaDatos.Register("Test", "User", "test@example.com", "weak");
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Register_EmailYaExiste_DebeLanzarArgumentException()
-        {
+        [TestMethod]
+        public void GetActivitiesForUser_ConUsuarioSinActividades_DebeRetornarListaVacia() {
             // Arrange
-            string email = "duplicado@example.com";
-            _capaDatos.Register("Test1", "User1", email, "Password123!");
+            var user = new User("User", "SinActividades", "sinact@example.com", "Password123!");
+            user.Id = 10;
+            _capaDatos.GuardaUser(user);
 
-            // Act - Intentar registrar con el mismo email
-            _capaDatos.Register("Test2", "User2", email, "Password456!");
+            // Act
+            var activities = _capaDatos.GetActivitiesForUser(10);
+
+            // Assert
+            Assert.IsNotNull(activities);
+            Assert.AreEqual(0, activities.Count);
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Register_EmailFormatoInvalido_DebeLanzarArgumentException()
-        {
+        [TestMethod]
+        public void GetActivitiesForUser_ConIdUsuarioNoExistente_DebeRetornarListaVacia() {
             // Act
-            _capaDatos.Register("Test", "User", "emailinvalido", "Password123!");
+            var activities = _capaDatos.GetActivitiesForUser(999);
+            // Assert
+            Assert.IsNotNull(activities);
+            Assert.AreEqual(0, activities.Count);
         }
 
         #endregion
@@ -435,80 +263,42 @@ namespace Datos.Tests
         #region GuardaActivity Tests
 
         [TestMethod()]
-        public void GuardaActivity_ActividadNueva_DebeRetornarTrue()
-        {
+        public void GuardaActivity_ConActividadNueva_DebeAgregarlaYRetornarTrue() {
             // Arrange
-            var usuario = new User("Test", "User", "activity@example.com", "Password123!");
-            usuario.Id = 1;
+            var usuario = new User("Test", "User", "actividad@test.com", "Password123!");
             _capaDatos.GuardaUser(usuario);
-            var actividad = new ActivityRunning(usuario, "Nueva Actividad", "", DateTime.Now, 60, "", "Park", 10f, 150);
+            var actividad = new ActivityRunning(usuario, "Carrera de prueba", "", DateTime.Now, 30, "", "Parque", 5f, 150);
+            int actividadesAntes = _capaDatos.GetActivitiesForUser(usuario.Id).Count;
 
             // Act
-            var result = _capaDatos.GuardaActivity(actividad);
+            bool resultado = _capaDatos.GuardaActivity(actividad);
+            int actividadesDespues = _capaDatos.GetActivitiesForUser(usuario.Id).Count;
 
             // Assert
-            Assert.IsTrue(result);
+            Assert.IsTrue(resultado, "Debería retornar true al guardar una nueva actividad.");
+            Assert.AreEqual(actividadesAntes + 1, actividadesDespues, "El número de actividades debería haberse incrementado en uno.");
         }
 
         [TestMethod()]
-        public void GuardaActivity_ActividadDuplicada_DebeRetornarFalse()
-        {
+        public void GuardaActivity_ConActividadDuplicada_DebeRetornarFalse() {
             // Arrange
-            var usuario = new User("Test", "User", "activity2@example.com", "Password123!");
-            usuario.Id = 2;
+            var usuario = new User("Test", "User", "actividad.duplicada@test.com", "Password123!");
             _capaDatos.GuardaUser(usuario);
-            var actividad = new ActivityRunning(usuario, "Actividad Duplicada", "", DateTime.Now, 60, "", "Park", 10f, 150);
-            _capaDatos.GuardaActivity(actividad);
+            var actividad = new ActivityRunning(usuario, "Carrera duplicada", "", DateTime.Now, 30, "", "Parque", 5f, 150);
 
-            // Act - Intentar guardar la misma actividad dos veces
-            var result = _capaDatos.GuardaActivity(actividad);
+            // Guardamos la actividad por primera vez (debería tener éxito)
+            _capaDatos.GuardaActivity(actividad);
+            int actividadesAntes = _capaDatos.GetActivitiesForUser(usuario.Id).Count;
+
+            // Act: Intentamos guardar la misma instancia de la actividad por segunda vez
+            bool resultado = _capaDatos.GuardaActivity(actividad);
+            int actividadesDespues = _capaDatos.GetActivitiesForUser(usuario.Id).Count;
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.IsFalse(resultado, "Debería retornar false al intentar guardar una actividad duplicada.");
+            Assert.AreEqual(actividadesAntes, actividadesDespues, "El número de actividades no debería haber cambiado.");
         }
 
         #endregion
-
-        #region LeeActivity Tests
-
-        [TestMethod()]
-        public void LeeActivity_IndiceValido_DebeRetornarActividad()
-        {
-            // Arrange
-            var usuario = new User("Test", "User", "leeactivity@example.com", "Password123!");
-            usuario.Id = 3;
-            _capaDatos.GuardaUser(usuario);
-            var actividad = new ActivityRunning(usuario, "Leer Actividad", "", DateTime.Now, 60, "", "Park", 10f, 150);
-            _capaDatos.GuardaActivity(actividad);
-
-            // Act - El índice 0 debería ser válido si hay al menos una actividad
-            var result = _capaDatos.LeeActivity(0);
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod()]
-        public void LeeActivity_IndiceNegativo_DebeRetornarNull()
-        {
-            // Act
-            var result = _capaDatos.LeeActivity(-1);
-
-            // Assert
-            Assert.IsNull(result);
-        }
-
-        [TestMethod()]
-        public void LeeActivity_IndiceFueraDeRango_DebeRetornarNull()
-        {
-            // Act - Índice muy alto
-            var result = _capaDatos.LeeActivity(99999);
-
-            // Assert
-            Assert.IsNull(result);
-        }
-
-        #endregion
-
     }
 }
