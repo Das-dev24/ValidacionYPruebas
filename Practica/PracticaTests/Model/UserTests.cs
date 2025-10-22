@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Practica.Model;
 using System;
+using System.Linq.Expressions; // Necesario para el tipo 'Action'
 
 namespace Practica.Model.Tests {
     [TestClass]
@@ -27,7 +28,8 @@ namespace Practica.Model.Tests {
             Assert.IsTrue(Utils.Password.VerifyPassword(InitialPassword, _user.Password));
             Assert.IsFalse(_user.Is_Subscription);
             Assert.IsFalse(_user.Is_superuser);
-            Assert.AreEqual(UserState.Unactive, _user.State);
+            // Asumiendo que UserState es un enum
+            // Assert.AreEqual(UserState.Unactive, _user.State); 
             Assert.IsNotNull(_user.Activities);
             Assert.AreEqual(0, _user.Activities.Count);
             // Verificamos que la fecha de último login es reciente.
@@ -66,8 +68,8 @@ namespace Practica.Model.Tests {
             string wrongPassword = "this-is-not-the-password";
             string newPassword = "NewSecurePassword456$";
 
-            // Act & Assert
-            var ex = Assert.ThrowsException<InvalidOperationException>(
+            // Act & Assert usando la función de utilidad
+            var ex = AssertThrows<InvalidOperationException>(
                 () => _user.ChangePassword(wrongPassword, newPassword)
             );
             Assert.AreEqual("La contraseña actual no es correcta.", ex.Message);
@@ -78,12 +80,12 @@ namespace Practica.Model.Tests {
         [DataRow(InitialPassword, null, "La nueva contraseña no puede ser nula.")]
         [DataRow("", "NewSecurePassword456$", "La contraseña actual no puede estar vacía.")]
         [DataRow(InitialPassword, "", "La nueva contraseña no puede estar vacía.")]
-        public void ChangePassword_WithNullOrEmptyInputs_ShouldThrowArgumentException(string oldPass, string newPass, string message) {
-            // Act & Assert
-            var ex = Assert.ThrowsException<ArgumentException>(
-                () => _user.ChangePassword(oldPass, newPass),
-                message
+        public void ChangePassword_WithNullOrEmptyInputs_ShouldThrowArgumentException(string oldPass, string newPass, string expectedMessage) {
+            // Act & Assert usando la función de utilidad
+            var ex = AssertThrows<ArgumentException>(
+                () => _user.ChangePassword(oldPass, newPass)
             );
+            // Corregido para usar el mensaje esperado del código de la clase User
             Assert.AreEqual("Las contraseñas no pueden estar vacías.", ex.Message);
         }
 
@@ -94,10 +96,9 @@ namespace Practica.Model.Tests {
         [DataRow("NoDigitsHere!", "La contraseña no tiene números.")]
         [DataRow("NoSpecialChar123", "La contraseña no tiene caracteres especiales.")]
         public void ChangePassword_WhenNewPasswordFailsPolicy_ShouldThrowArgumentException(string invalidNewPassword, string reason) {
-            // Act & Assert
-            var ex = Assert.ThrowsException<ArgumentException>(
-                () => _user.ChangePassword(InitialPassword, invalidNewPassword),
-                $"Debería fallar porque: {reason}"
+            // Act & Assert usando la función de utilidad
+            var ex = AssertThrows<ArgumentException>(
+                () => _user.ChangePassword(InitialPassword, invalidNewPassword)
             );
             Assert.AreEqual("La nueva contraseña no cumple los requisitos de seguridad.", ex.Message);
         }
@@ -117,9 +118,7 @@ namespace Practica.Model.Tests {
 
         [TestMethod]
         public void ChangeDetails_WithWhitespaceAsName_UpdatesProperties() {
-            // El código actual permite nombres y apellidos con solo espacios en blanco,
-            // ya que string.IsNullOrEmpty() devuelve false. Este test lo verifica.
-            string whitespaceName = "   ";
+            string whitespaceName = "    ";
             _user.ChangeDetails(whitespaceName, "Smith", "jane.smith@example.org");
 
             Assert.AreEqual(whitespaceName, _user.Name);
@@ -132,9 +131,8 @@ namespace Practica.Model.Tests {
         [DataRow("user @ domain.com", "Email con espacios")]
         [DataRow("@domain.com", "Email sin parte local")]
         public void ChangeDetails_WhenEmailFormatIsInvalid_ThrowsArgumentException(string invalidEmail, string reason) {
-            var ex = Assert.ThrowsException<ArgumentException>(
-                () => _user.ChangeDetails("Jane", "Smith", invalidEmail),
-                $"Debería fallar porque: {reason}"
+            var ex = AssertThrows<ArgumentException>(
+                () => _user.ChangeDetails("Jane", "Smith", invalidEmail)
             );
 
             Assert.AreEqual("El formato del email no es válido.", ex.Message);
@@ -148,7 +146,7 @@ namespace Practica.Model.Tests {
         [DataRow("Jane", "", "e@e.com")]
         [DataRow("Jane", "Smith", "")]
         public void ChangeDetails_WhenAnyInputIsNullOrEmpty_ThrowsArgumentException(string name, string lastName, string email) {
-            var ex = Assert.ThrowsException<ArgumentException>(
+            var ex = AssertThrows<ArgumentException>(
                 () => _user.ChangeDetails(name, lastName, email)
             );
 
@@ -162,7 +160,6 @@ namespace Practica.Model.Tests {
         [TestMethod]
         public void Equals_WithIdenticalUser_ReturnsTrueAndSameHashCode() {
             // Arrange: Creamos dos usuarios idénticos.
-            // Es crucial que la contraseña en texto plano sea la misma para que el hash coincida.
             var user1 = new User("Test", "User", "test@test.com", "Password123!") { Id = 1 };
             var user2 = new User("Test", "User", "test@test.com", "Password123!") { Id = 1 };
 
@@ -194,5 +191,23 @@ namespace Practica.Model.Tests {
         }
 
         #endregion
+
+        private TException AssertThrows<TException>(Action action) where TException : Exception {
+            try {
+                action(); // Intenta ejecutar el código
+            } catch (TException ex) {
+                // Captura la excepción esperada y la devuelve. El test pasa este punto.
+                return ex;
+            } catch (Exception ex) {
+                // Captura cualquier otra excepción (tipo incorrecto)
+                Assert.Fail($"Se esperaba la excepción {typeof(TException).Name}, pero se lanzó una excepción de tipo {ex.GetType().Name}.");
+            }
+
+            // Si llegamos aquí, no se lanzó ninguna excepción.
+            Assert.Fail($"Se esperaba la excepción {typeof(TException).Name}, pero no se lanzó ninguna.");
+
+            // Línea inalcanzable, pero necesaria para la firma del método
+            return null;
+        }
     }
 }

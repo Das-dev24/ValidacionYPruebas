@@ -200,7 +200,7 @@ namespace Datos.Tests {
             _capaDatos.Register("Existente", "Usuario", "existente@test.com", "PasswordValido123!");
 
             // Act & Assert
-            var ex = Assert.ThrowsException<ArgumentException>(() => _capaDatos.Register(name, lastName, email, password));
+            var ex = AssertThrows<ArgumentException>(() => _capaDatos.Register(name, lastName, email, password));
             Assert.AreEqual(expectedMessage, ex.Message);
         }
 
@@ -300,5 +300,24 @@ namespace Datos.Tests {
         }
 
         #endregion
+
+        private TException AssertThrows<TException>(Action action) where TException : Exception {
+            try {
+                action(); // Intenta ejecutar el código que esperamos que falle
+            } catch (TException ex) {
+                // Captura la excepción esperada y la devuelve. El test es exitoso en este punto.
+                return ex;
+            } catch (Exception ex) {
+                // Captura cualquier otra excepción (tipo incorrecto)
+                Assert.Fail($"Se esperaba la excepción {typeof(TException).Name}, pero se lanzó una excepción de tipo {ex.GetType().Name}.");
+            }
+
+            // Si llegamos aquí, no se lanzó ninguna excepción.
+            Assert.Fail($"Se esperaba la excepción {typeof(TException).Name}, pero no se lanzó ninguna.");
+
+            // Retorno dummy para cumplir con la firma del método
+            return null;
+        }
     }
 }
+
