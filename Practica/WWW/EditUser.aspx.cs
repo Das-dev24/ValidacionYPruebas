@@ -70,6 +70,7 @@ namespace WWW {
                     //Data.UpdateUser(userToUpdate);
 
                     ShowMessage("¡Usuario actualizado correctamente!", isError: false);
+                    Response.AppendHeader("Refresh", "2;url=AdminUsers.aspx");
                 }
             } catch (Exception ex) {
                 ShowMessage("Error al guardar: " + ex.Message, isError: true);
