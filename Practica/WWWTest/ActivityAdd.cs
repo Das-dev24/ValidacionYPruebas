@@ -13,48 +13,13 @@ namespace SeleniumTests
     [TestClass]
     public class ActivityAdd
     {
-        private static IWebDriver driver;
-        private StringBuilder verificationErrors;
-        private static string baseURL;
-        private bool acceptNextAlert = true;
-        
-        [ClassInitialize]
-        public static void InitializeClass(TestContext testContext)
-        {
-            driver = new ChromeDriver();
-            baseURL = "https://www.google.com/";
-        }
-        
-        [ClassCleanup]
-        public static void CleanupClass()
-        {
-            try
-            {
-                //driver.Quit();// quit does not close the window
-                driver.Close();
-                driver.Dispose();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-        }
-        
-        [TestInitialize]
-        public void InitializeTest()
-        {
-            verificationErrors = new StringBuilder();
-        }
-        
-        [TestCleanup]
-        public void CleanupTest()
-        {
-            Assert.AreEqual("", verificationErrors.ToString());
-        }
         
         [TestMethod]
         public void TheActivityAddTest()
         {
+            IWebDriver driver = new ChromeDriver();
+            string baseURL = "https://www.google.com/";
+
             driver.Navigate().GoToUrl("https://localhost:44396/LogIn.aspx");
             driver.FindElement(By.Id("txtEmail")).Click();
             driver.FindElement(By.Id("txtEmail")).Clear();
@@ -89,6 +54,17 @@ namespace SeleniumTests
             driver.FindElement(By.Id("txtNotes")).SendKeys("Series de 1min + 2mins recuperación");
             driver.FindElement(By.Id("btnSave")).Click();
             driver.Navigate().GoToUrl("https://localhost:44396/MainView.aspx");
+
+            try
+            {
+                //driver.Quit();// quit does not close the window
+                driver.Close();
+                driver.Dispose();
+            }
+            catch (Exception)
+            {
+                // Ignore errors if unable to close the browser
+            }
         }
     }
 }

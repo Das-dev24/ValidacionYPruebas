@@ -13,21 +13,21 @@ namespace SeleniumTests
     [TestClass]
     public class AdminLogIn
     {
-        private static IWebDriver driver;
-        private StringBuilder verificationErrors;
-        private static string baseURL;
-        private bool acceptNextAlert = true;
-
-        [ClassInitialize]
-        public static void InitializeClass(TestContext testContext)
+        [TestMethod]
+        public void TheAdminLogInTest()
         {
-            driver = new ChromeDriver();
-            baseURL = "https://www.google.com/";
-        }
+            IWebDriver driver = new ChromeDriver();
+            string baseURL = "https://www.google.com/";
 
-        [ClassCleanup]
-        public static void CleanupClass()
-        {
+            driver.Navigate().GoToUrl("https://localhost:44396/LogIn.aspx");
+            driver.FindElement(By.Id("txtEmail")).Click();
+            driver.FindElement(By.Id("txtEmail")).Clear();
+            driver.FindElement(By.Id("txtEmail")).SendKeys("admin@example.com");
+            driver.FindElement(By.Id("txtPassword")).Clear();
+            driver.FindElement(By.Id("txtPassword")).SendKeys("Admin123456!");
+            driver.FindElement(By.Id("btnLogin")).Click();
+            Assert.AreEqual("https://localhost:44396/MainView.aspx", driver.Url);
+
             try
             {
                 driver.Close();
@@ -37,31 +37,6 @@ namespace SeleniumTests
             {
                 // Ignore errors if unable to close the browser
             }
-        }
-
-        [TestInitialize]
-        public void InitializeTest()
-        {
-            verificationErrors = new StringBuilder();
-        }
-
-        [TestCleanup]
-        public void CleanupTest()
-        {
-            Assert.AreEqual("", verificationErrors.ToString());
-        }
-
-        [TestMethod]
-        public void TheAdminLogInTest()
-        {
-            driver.Navigate().GoToUrl("https://localhost:44396/LogIn.aspx");
-            driver.FindElement(By.Id("txtEmail")).Click();
-            driver.FindElement(By.Id("txtEmail")).Clear();
-            driver.FindElement(By.Id("txtEmail")).SendKeys("admin@example.com");
-            driver.FindElement(By.Id("txtPassword")).Clear();
-            driver.FindElement(By.Id("txtPassword")).SendKeys("Admin123456!");
-            driver.FindElement(By.Id("btnLogin")).Click();
-            Assert.AreEqual("https://localhost:44396/MainView.aspx", driver.Url);
         }
     }
 }
