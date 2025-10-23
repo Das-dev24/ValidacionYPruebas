@@ -1,6 +1,7 @@
 # Dependencias de gestores de paquetes
 ## NuGet
 packages/
+PracticaTests/
 
 # Ficheros específicos de Visual Studio
 .vs/
