@@ -1,0 +1,38 @@
+[
+  {
+    "email": "plainaddress",
+    "descripcion": "No contiene '@'"
+  },
+  {
+    "email": "test@.com",
+    "descripcion": "Dominio empieza con punto (inválido)"
+  },
+  {
+    "email": "test@domain.com.",
+    "descripcion": "Dominio termina con punto (inválido)"
+  },
+  {
+    "email": "test@domain..com",
+    "descripcion": "Dominio contiene puntos consecutivos (inválido)"
+  },
+  {
+    "email": "test@domain.c",
+    "descripcion": "TLD es menor de 2 caracteres (inválido)"
+  },
+  {
+    "email": "@missinglocalpart.com",
+    "descripcion": "Falta la parte local antes de '@'"
+  },
+  {
+    "email": "global@",
+    "descripcion": "Falta el dominio después de '@'"
+  },
+  {
+    "email": "test@@example.com",
+    "descripcion": "Contiene múltiples '@'"
+  },
+  {
+    "email": "test@localhost",
+    "descripcion": "Dominio sin TLD (inválido por nuestra regla de TLD > 1)"
+  }
+]

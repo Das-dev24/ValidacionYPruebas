@@ -1,0 +1,26 @@
+[
+  {
+    "email": null,
+    "descripcion": "Un email nulo debe ser inválido"
+  },
+  {
+    "email": "",
+    "descripcion": "Un email vacío debe ser inválido"
+  },
+  {
+    "email": "    ",
+    "descripcion": "Un email con solo espacios debe ser inválido"
+  },
+  {
+    "email": "username @ domain.com",
+    "descripcion": "Un email con espacios intermedios debe ser inválido"
+  },
+  {
+    "email": " test@test.com",
+    "descripcion": "Un email con espacios al inicio debe ser inválido"
+  },
+  {
+    "email": "test@test.com ",
+    "descripcion": "Un email con espacios al final debe ser inválido"
+  }
+]

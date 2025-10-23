@@ -35,12 +35,12 @@ namespace Datos.Tests {
 
             // Verifica que se han añadido las actividades esperadas
             var allActivities = _fakeCapaDatos.GetAllActivities();
-            Assert.AreEqual(8, allActivities.Count, "Debe añadir 8 actividades iniciales.");
+            Assert.HasCount(8, allActivities, "Debe añadir 8 actividades iniciales.");
 
             // Verificación más específica: Juan debería tener 4 actividades
             var juan = _fakeCapaDatos.LeeUser("juan.perez@example.com");
             var juanActivities = allActivities.Where(a => a.User.Id == juan.Id).ToList();
-            Assert.AreEqual(4, juanActivities.Count, "El usuario Juan debería tener 4 actividades.");
+            Assert.HasCount(4, juanActivities, "El usuario Juan debería tener 4 actividades.");
         }
 
         [TestMethod]
@@ -54,7 +54,7 @@ namespace Datos.Tests {
 
             // Assert
             Assert.AreEqual(1, _fakeCapaDatos.NumUsers(), "El número de usuarios no debería cambiar si la BD no está vacía.");
-            Assert.AreEqual(0, _fakeCapaDatos.GetAllActivities().Count, "No se debería haber añadido ninguna actividad.");
+            Assert.IsEmpty(_fakeCapaDatos.GetAllActivities(), "No se debería haber añadido ninguna actividad.");
         }
 
         [TestMethod]
@@ -67,7 +67,7 @@ namespace Datos.Tests {
 
             // Assert
             Assert.AreEqual(3, _fakeCapaDatos.NumUsers(), "Los usuarios se guardan igualmente.");
-            Assert.AreEqual(0, _fakeCapaDatos.GetAllActivities().Count, "No se deben crear actividades si los usuarios no se encuentran.");
+            Assert.IsEmpty(_fakeCapaDatos.GetAllActivities(), "No se debería haber añadido ninguna actividad.");
         }
 
         #endregion

@@ -110,14 +110,14 @@ namespace Datos.Tests {
             var actividad = new ActivityRunning(usuario, "Carrera", "", DateTime.Now, 30, "", "Parque", 5f, 100);
             _capaDatos.GuardaActivity(actividad);
 
-            Assert.AreEqual(1, _capaDatos.GetActivitiesForUser(usuario.Id).Count, "Precondición: El usuario debe tener una actividad.");
+            Assert.HasCount(1, _capaDatos.GetActivitiesForUser(usuario.Id), "Precondición: El usuario debe tener una actividad.");
 
             // Act
             _capaDatos.DeleteUser(usuario);
 
             // Assert
             Assert.IsNull(_capaDatos.LeeUser("borrar.act@example.com"), "El usuario debería haber sido eliminado.");
-            Assert.AreEqual(0, _capaDatos.GetActivitiesForUser(usuario.Id).Count, "Las actividades del usuario también deberían haber sido eliminadas.");
+            Assert.HasCount(0, _capaDatos.GetActivitiesForUser(usuario.Id), "Las actividades del usuario también deberían haber sido eliminadas.");
         }
 
         [TestMethod]
@@ -146,10 +146,10 @@ namespace Datos.Tests {
             // Assert
             Assert.IsTrue(result, "La validación debería ser exitosa.");
             Assert.AreEqual(UserState.Active, usuarioValidado.State, "El estado del usuario debería cambiar a Active.");
-            Assert.IsNotNull(usuarioValidado.Last_login, "La fecha de último login debería actualizarse.");
+            Assert.IsLessThan(5, (DateTime.Now - usuarioValidado.Last_login).TotalSeconds, "La fecha de último login debería ser muy reciente.");
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(null, "pass", typeof(ArgumentNullException))]
         [DataRow("email", null, typeof(ArgumentNullException))]
         [DataRow("no.existe@email.com", "pass", typeof(InvalidOperationException))]
@@ -187,7 +187,7 @@ namespace Datos.Tests {
             Assert.AreEqual(UserState.Unactive, usuarioCreado.State, "El usuario debe crearse como inactivo.");
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(null, "User", "email@test.com", "Pass123!", "Todos los campos son obligatorios.")]
         [DataRow("Test", null, "email@test.com", "Pass123!", "Todos los campos son obligatorios.")]
         [DataRow("Test", "User", null, "Pass123!", "Todos los campos son obligatorios.")]
@@ -230,7 +230,7 @@ namespace Datos.Tests {
 
             // Assert
             Assert.IsNotNull(activitiesUser1);
-            Assert.AreEqual(2, activitiesUser1.Count, "Debería retornar solo las actividades del usuario 1.");
+            Assert.HasCount(2, activitiesUser1, "Debería retornar solo las actividades del usuario 1.");
             Assert.IsTrue(activitiesUser1.All(a => a.User.Id == 1));
         }
 
@@ -246,7 +246,7 @@ namespace Datos.Tests {
 
             // Assert
             Assert.IsNotNull(activities);
-            Assert.AreEqual(0, activities.Count);
+            Assert.IsEmpty(activities);
         }
 
         [TestMethod]
@@ -255,7 +255,7 @@ namespace Datos.Tests {
             var activities = _capaDatos.GetActivitiesForUser(999);
             // Assert
             Assert.IsNotNull(activities);
-            Assert.AreEqual(0, activities.Count);
+            Assert.IsEmpty(activities);
         }
 
         #endregion

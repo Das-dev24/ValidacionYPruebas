@@ -21,7 +21,7 @@ namespace Practica.Model.Tests {
 
         #region ActivityRunning Tests
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(-10f, 60, "La distancia debe ser mayor que cero.")]
         [DataRow(10f, 0, "La duración debe ser mayor que cero.")]
         [DataRow(10f, -5, "La duración debe ser mayor que cero.")]
@@ -55,7 +55,7 @@ namespace Practica.Model.Tests {
             Assert.AreEqual(expectedRythm, rythm);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("Series en cuesta", 45, "La Quinta", 8.5f, "Carrera en La Quinta de 8,5 a un ritmo de: 5,29 mins/km")]
         [DataRow("Carrera larga", 120, "Montaña", 15.0f, "Carrera en Montaña de 15 a un ritmo de: 8,00 mins/km")]
         public void ActivityRunning_ObtainActivity_WithValidInputs_ReturnsCorrectlyFormattedString(string name, int duration, string place, float distance, string expected) {
@@ -76,7 +76,7 @@ namespace Practica.Model.Tests {
 
         #region ActividadCycling Tests
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(-50f, 120, "La distancia debe ser mayor que cero.")]
         [DataRow(50f, 0, "La duración debe ser mayor que cero.")]
         [DataRow(50f, -10, "La duración debe ser mayor que cero.")]
@@ -102,7 +102,7 @@ namespace Practica.Model.Tests {
             Assert.AreEqual("La distancia no puede ser cero al calcular el ritmo.", ex.Message);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(90, 45f, "2,00")]
         [DataRow(120, 40f, "3,00")]
         public void ActividadCycling_SpeedAndRythm_WithValidInputs_CalculateCorrectly(int duration, float distance, string expectedRythm) {
@@ -124,7 +124,7 @@ namespace Practica.Model.Tests {
             Assert.AreEqual("0,00", speed);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("Ruta larga", 120, "Merindades", 40f, 500, "Ciclismo en Merindades de 40 a un ritmo de: 3,00 mins/km. Y una velocidad media de: 20,00 km/h, y un desnivel de 500")]
         [DataRow("Salida corta", 60, "Ciudad", 20f, 100, "Ciclismo en Ciudad de 20 a un ritmo de: 3,00 mins/km. Y una velocidad media de: 20,00 km/h, y un desnivel de 100")]
         public void ActividadCycling_ObtainActivity_WithValidInputs_ReturnsCorrectlyFormattedString(string name, int duration, string place, float distance, int slope, string expected) {
@@ -145,7 +145,7 @@ namespace Practica.Model.Tests {
 
         #region ActivitySwimming Tests
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(-1500, 45, "La distancia en natación no puede ser negativa.")]
         [DataRow(1500, 0, "La duración debe ser mayor que cero.")]
         [DataRow(1500, -5, "La duración debe ser mayor que cero.")]
@@ -163,7 +163,7 @@ namespace Practica.Model.Tests {
             Assert.IsNotNull(activity, "La actividad no debería ser nula con una distancia de cero.");
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("Técnica de crol", 50, "San Amaro", 2000, "Natación en San Amaro de 2000 m en 50 mins")]
         [DataRow("Entrenamiento corto", 30, "Club Deportivo", 1000, "Natación en Club Deportivo de 1000 m en 30 mins")]
         public void ActivitySwimming_ObtainActivity_WithValidInputs_ReturnsCorrectlyFormattedString(string name, int duration, string place, int distance, string expected) {
@@ -176,7 +176,7 @@ namespace Practica.Model.Tests {
 
         #region ActivityGym Tests
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(-100, 60, "Las calorias quemadas no pueden ser negativas.")]
         [DataRow(300, 0, "La duración debe ser mayor que cero.")]
         [DataRow(300, -10, "La duración debe ser mayor que cero.")]
@@ -194,7 +194,7 @@ namespace Practica.Model.Tests {
             Assert.IsNotNull(activity, "La actividad no debería ser nula con cero calorías.");
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("Día de pierna", 75, 450, "Tren inferior", "Entrenamiento de Tren inferior, quemando 450 calorías en 75 mins")]
         [DataRow("Cardio", 45, 350, "Cardiovascular", "Entrenamiento de Cardiovascular, quemando 350 calorías en 45 mins")]
         public void ActivityGym_ObtainActivity_WithValidInputs_ReturnsCorrectlyFormattedString(string name, int duration, int calories, string trainingType, string expected) {
@@ -207,7 +207,7 @@ namespace Practica.Model.Tests {
 
         #region ActivityOther Tests
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(0)]
         [DataRow(-15)]
         public void ActivityOther_Constructor_WithInvalidDuration_ThrowsArgumentException(int invalidDuration) {
@@ -218,7 +218,7 @@ namespace Practica.Model.Tests {
             Assert.AreEqual("La duración debe ser mayor que cero.", ex.Message, "El mensaje de la excepción no es el esperado.");
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("Partido semanal", 90, "Club de Campo", "Tenis", "Entrenamiento de Tenis en 90 mins en Club de Campo .")]
         [DataRow("Clase de yoga", 60, "Estudio", "Yoga", "Entrenamiento de Yoga en 60 mins en Estudio .")]
         public void ActivityOther_ObtainActivity_WithValidInputs_ReturnsCorrectlyFormattedString(string name, int duration, string place, string otherActivity, string expected) {

@@ -1,0 +1,26 @@
+[
+  {
+    "email": "test@example.com",
+    "descripcion": "Correo estándar"
+  },
+  {
+    "email": "john.doe@example.co.uk",
+    "descripcion": "Correo con subdominio"
+  },
+  {
+    "email": "user+alias@subdomain.example.com",
+    "descripcion": "Correo con alias (+)"
+  },
+  {
+    "email": "user123@example-one.com",
+    "descripcion": "Correo con guion en el dominio"
+  },
+  {
+    "email": "email@machine.museum",
+    "descripcion": "Correo con TLD largo"
+  },
+  {
+    "email": "firstname.lastname@example.com",
+    "descripcion": "Correo con punto en la parte local"
+  }
+]

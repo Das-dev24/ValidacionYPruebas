@@ -1,60 +1,83 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Practica.Utils;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json.Nodes;
 
 namespace Practica.Utils.Tests {
-    [TestClass()]
+    [TestClass]
     public class EmailTests {
-        #region Valid Email Formats
+        #region Correos con Formato Válido (desde JSON)
 
-        [DataTestMethod]
-        [DataRow("test@example.com")]
-        [DataRow("john.doe@example.co.uk")]
-        [DataRow("user+alias@subdomain.example.com")]
-        [DataRow("user123@example-one.com")]
-        [DataRow("email@machine.museum")]
-        public void IsValidFormat_WhenEmailIsValid_ShouldReturnTrue(string validEmail) {
+        public static IEnumerable<object[]> GetValidEmailData() {
+            return LoadTestData("emails_validos.json");
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(GetValidEmailData))]
+        public void IsValidFormat_WhenEmailIsValid_ShouldReturnTrue(string validEmail, string description) {
             // Act
             bool result = Email.IsValidFormat(validEmail);
+
             // Assert
-            Assert.IsTrue(result, $"El email '{validEmail}' debería ser válido.");
+            Assert.IsTrue(result, $"El email '{validEmail}' debería ser válido. Caso: {description}");
         }
 
         #endregion
 
-        #region Invalid Formats (Caught by initial checks)
 
-        [DataTestMethod]
-        [DataRow(null, "Un email nulo debe devolver false.")]
-        [DataRow("", "Un email vacío debe devolver false.")]
-        [DataRow("    ", "Un email con solo espacios debe devolver false.")]
-        [DataRow("username @ domain.com", "Un email con espacios intermedios debe ser inválido.")]
-        [DataRow(" test@test.com", "Un email con espacios al inicio debe ser inválido.")]
-        public void IsValidFormat_WhenEmailIsInvalidByWhitespace_ShouldReturnFalse(string email, string message) {
-            // Act
-            bool result = Email.IsValidFormat(email);
-            // Assert
-            Assert.IsFalse(result, message);
+        #region Correos con Formato Inválido por Espacios (desde JSON)
+
+        public static IEnumerable<object[]> GetInvalidWhitespaceEmailData() {
+            return LoadTestData("emails_invalidos_espacios.json");
         }
 
-        #endregion
-
-        #region Invalid Formats (Caught by try-catch and custom logic)
-
-        [DataTestMethod]
-        // Casos que DEBEN lanzar FormatException y ser atrapados por el CATCH
-        [DataRow("plainaddress")]             // No tiene '@'
-        [DataRow("@missingusername.com")]     // Falta la parte local
-        [DataRow("username@.com")]            // Dominio inválido
-        [DataRow("test@domain.com.")]         // Punto al final del dominio
-
-        // Casos que NO lanzan excepción pero fallan la LÓGICA PERSONALIZADA
-        [DataRow("username@domain..com")]     // Falla la comprobación de '..'
-        [DataRow("username@domain.c")]        // Falla la comprobación de longitud del TLD
-        public void IsValidFormat_WhenEmailIsStructurallyInvalid_ShouldReturnFalse(string invalidEmail) {
+        [TestMethod]
+        [DynamicData(nameof(GetInvalidWhitespaceEmailData))]
+        public void IsValidFormat_WhenEmailContainsWhitespace_ShouldReturnFalse(string invalidEmail, string description) {
             // Act
             bool result = Email.IsValidFormat(invalidEmail);
+
             // Assert
-            Assert.IsFalse(result, $"El email '{invalidEmail}' debería ser inválido.");
+            Assert.IsFalse(result, $"El email '{invalidEmail}' debería ser inválido. Caso: {description}");
+        }
+
+        #endregion
+
+
+        #region Correos con Formato Inválido por Estructura (desde JSON)
+
+        public static IEnumerable<object[]> GetInvalidStructuralEmailData() {
+            return LoadTestData("emails_invalidos_estructura.json");
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(GetInvalidStructuralEmailData))]
+        public void IsValidFormat_WhenEmailIsStructurallyInvalid_ShouldReturnFalse(string invalidEmail, string description) {
+            // Act
+            bool result = Email.IsValidFormat(invalidEmail);
+
+            // Assert
+            Assert.IsFalse(result, $"El email '{invalidEmail}' debería ser inválido. Caso: {description}");
+        }
+
+        #endregion
+
+
+        #region Método Auxiliar de Carga de Datos
+
+        private static IEnumerable<object[]> LoadTestData(string fileName) {
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData", fileName);
+            string json = File.ReadAllText(filePath);
+
+            JsonArray testCases = JsonNode.Parse(json).AsArray();
+
+            foreach (var testCase in testCases) {
+                string email = testCase["email"]?.GetValue<string>();
+                string descripcion = testCase["descripcion"]?.GetValue<string>() ?? "Sin descripción";
+
+                yield return new object[] { email, descripcion };
+            }
         }
 
         #endregion

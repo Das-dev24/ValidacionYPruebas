@@ -29,11 +29,10 @@ namespace Practica.Model.Tests {
             Assert.IsFalse(_user.Is_Subscription);
             Assert.IsFalse(_user.Is_superuser);
             // Asumiendo que UserState es un enum
-            // Assert.AreEqual(UserState.Unactive, _user.State); 
             Assert.IsNotNull(_user.Activities);
-            Assert.AreEqual(0, _user.Activities.Count);
+            Assert.IsEmpty(_user.Activities);
             // Verificamos que la fecha de último login es reciente.
-            Assert.IsTrue((DateTime.Now - _user.Last_login).TotalSeconds < 5);
+            Assert.IsLessThan(1, (DateTime.Now - _user.Last_login).TotalSeconds);
         }
 
         #endregion
@@ -75,7 +74,7 @@ namespace Practica.Model.Tests {
             Assert.AreEqual("La contraseña actual no es correcta.", ex.Message);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(null, "NewSecurePassword456$", "La contraseña actual no puede ser nula.")]
         [DataRow(InitialPassword, null, "La nueva contraseña no puede ser nula.")]
         [DataRow("", "NewSecurePassword456$", "La contraseña actual no puede estar vacía.")]
@@ -89,7 +88,7 @@ namespace Practica.Model.Tests {
             Assert.AreEqual("Las contraseñas no pueden estar vacías.", ex.Message);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("short", "La contraseña es demasiado corta.")]
         [DataRow("nouppercase123!", "La contraseña no tiene mayúsculas.")]
         [DataRow("NOLOWERCASE123!", "La contraseña no tiene minúsculas.")]
@@ -125,7 +124,7 @@ namespace Practica.Model.Tests {
             Assert.AreEqual("Smith", _user.LastName);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("plainaddress", "Email sin @")]
         [DataRow("user@domain.c", "Email con TLD muy corto")]
         [DataRow("user @ domain.com", "Email con espacios")]
@@ -138,7 +137,7 @@ namespace Practica.Model.Tests {
             Assert.AreEqual("El formato del email no es válido.", ex.Message);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(null, "Smith", "e@e.com")]
         [DataRow("Jane", null, "e@e.com")]
         [DataRow("Jane", "Smith", null)]

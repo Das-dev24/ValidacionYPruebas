@@ -143,12 +143,27 @@
     <Compile Include="Model\ActivityTests.cs" />
     <Compile Include="Model\UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="TestData\passwords_invalidas.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="Utils\EmailTests.cs" />
+    <Compile Include="Utils\IBANTests.cs" />
+    <Compile Include="Utils\NIFTests.cs" />
     <Compile Include="Utils\PasswordTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
+    <Content Include="TestData\emails_validos.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="TestData\emails_invalidos_espacios.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\emails_invalidos_estructura.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Practica\Practica.csproj">
