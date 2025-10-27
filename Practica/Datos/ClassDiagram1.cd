@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Package -&gt; Seeder">
+    <Position X="0.5" Y="1.604" Height="0.417" Width="1.502" />
+  </Comment>
+  <Comment CommentText="Package -&gt; Util">
+    <Position X="0.5" Y="0.5" Height="0.75" Width="6.669" />
+  </Comment>
+  <Class Name="Datos.CapaDatos">
+    <Position X="2.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAGAAAIAAIAAUAEAAAAAAAAABAAAAEAgAEIEAAAA=</HashCode>
+      <FileName>CapaDatos.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Datos.Seeder.DatabaseSeeder" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAACAAAABAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Seeder\DatabaseSeeder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Database.ICapaDatos">
+    <Position X="2.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAIAAQAAAAAAAAAAABAAAAEAAAEAAAAAA=</HashCode>
+      <FileName>ICapaDatos.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Package -&gt; Model">
+    <Position X="8.5" Y="0.75" Height="0.75" Width="12.305" />
+  </Comment>
+  <Comment CommentText="Package -&gt; Util">
+    <Position X="0.5" Y="0.5" Height="0.75" Width="6.669" />
+  </Comment>
+  <Class Name="Practica.Utils.Email">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\Email.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Practica.Utils.IBAN">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Utils\IBAN.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Practica.Utils.NIF">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\NIF.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Practica.Utils.Password">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAACAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Utils\Password.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Practica.Model.Activity">
+    <Position X="12.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAAAAAAACAAAAAACAAAQAIAAAAACAEAAAAAAAAAA=</HashCode>
+      <FileName>Model\Activity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Practica.Model.ActividadCycling">
+    <Position X="9.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAABAEAAQACAAAAAQAAAAAA=</HashCode>
+      <FileName>Model\ActivityCycling.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Practica.Model.ActivityGym">
+    <Position X="14.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAACAAAAAACAAAAA=</HashCode>
+      <FileName>Model\ActivityGym.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Practica.Model.ActivityOther" Collapsed="true">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQACAgAAAAAAAAAA=</HashCode>
+      <FileName>Model\ActivityOther.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Practica.Model.ActivityRunning">
+    <Position X="12.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAEAAQACAAAAAQAAAAAA=</HashCode>
+      <FileName>Model\ActivityRunning.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Practica.Model.ActivitySwimming">
+    <Position X="16.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAQACAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\ActivitySwimming.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Practica.Model.User">
+    <Position X="18.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAIAAACAAgAAAgAAAAAQAAAAAAIASAAAIBoABAAg=</HashCode>
+      <FileName>Model\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Practica.Model.UserState">
+    <Position X="20" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAABAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Model\User.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Package -&gt; Seeder">
+    <Position X="0.5" Y="1.604" Height="0.417" Width="3.325" />
+  </Comment>
+  <Comment CommentText="Package -&gt; Util">
+    <Position X="0.5" Y="0.5" Height="0.75" Width="5.752" />
+  </Comment>
+  <Class Name="Datos.Tests.DatabaseSeederTests">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAEEAAAAAAAACAAAAAAAAAgAAAEAAAAAA=</HashCode>
+      <FileName>Seeder\DatabaseSeederTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Datos.Tests.FakeCapaDatos">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAIAAUAEAQABAAAAABAIAAEBgAEAEAAAA=</HashCode>
+      <FileName>Seeder\DatabaseSeederTests.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Datos.Tests.CapaDatosTests">
+    <Position X="4.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABBAACCQUAAAAEAAAQgAIAAAAAAAgQAAQACQQiAAI=</HashCode>
+      <FileName>CapaDatosTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
