@@ -154,7 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
+    <None Include="PracticaTest.cd" />
     <None Include="packages.config" />
     <Content Include="TestData\emails_validos.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

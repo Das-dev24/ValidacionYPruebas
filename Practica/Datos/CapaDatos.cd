@@ -4,7 +4,7 @@
     <Position X="0.5" Y="1.604" Height="0.417" Width="1.502" />
   </Comment>
   <Comment CommentText="Package -&gt; Util">
-    <Position X="0.5" Y="0.5" Height="0.75" Width="6.669" />
+    <Position X="0.5" Y="0.5" Height="0.75" Width="3.596" />
   </Comment>
   <Class Name="Datos.CapaDatos">
     <Position X="2.5" Y="4" Width="1.5" />
