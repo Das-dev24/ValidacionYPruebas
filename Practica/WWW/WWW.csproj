@@ -106,6 +106,7 @@
     <Content Include="AdminUsers.aspx" />
     <Content Include="EditUser.aspx" />
     <Content Include="AddActivity.aspx" />
+    <Content Include="Register.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddUser.aspx.cs">
@@ -157,6 +158,13 @@
     </Compile>
     <Compile Include="AddActivity.aspx.designer.cs">
       <DependentUpon>AddActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
