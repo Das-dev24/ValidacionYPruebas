@@ -99,6 +99,10 @@ namespace Datos.Tests {
 
         public List<Activity> GetAllActivities() => _activities;
 
+        public Activity GetActivityById(int activityId) {
+            return _activities.FirstOrDefault(a => a.Id == activityId);
+        }
+
         public bool DeleteUser(User userToDelete) => throw new NotImplementedException();
         public User LeeUserPorId(int userId) => throw new NotImplementedException();
         public bool ValidaUser(string email, string password) => throw new NotImplementedException();
