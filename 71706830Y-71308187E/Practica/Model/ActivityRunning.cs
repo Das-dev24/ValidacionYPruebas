@@ -7,10 +7,6 @@ using Practica.Model;
 
 namespace Practica.Model {
     public class ActivityRunning : Activity {
-        public float Distance { get; set; }
-        public int Slope { get; set; }
-        public string Place { get; set; }
-
         private float distance;
         private int slope; //Desnivel
         private string place;

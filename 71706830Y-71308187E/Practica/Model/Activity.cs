@@ -7,7 +7,6 @@ using Practica.Model;
 
 namespace Practica.Model {
     public abstract class Activity {
-        public int Id { get; set; }
         public User User { get; set; }
         public string Name { get; set; }
         public string TypeActivity { get; set; } // 1: Carrera, 2: Ciclismo, 3: Natacion, 4: Triatlon

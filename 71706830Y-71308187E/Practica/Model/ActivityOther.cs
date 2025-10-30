@@ -7,9 +7,6 @@ using Practica.Model;
 
 namespace Practica.Model {
     public class ActivityOther : Activity {
-        public string OtherActivity { get; set; }
-        public string Place { get; set; }
-
         private string otherActivity;
         private string place;
 

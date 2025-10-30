@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainView.aspx.cs" Inherits="WWW.MainView" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainView.aspx.cs" Inherits="WWW.MainView" %>
 <%@ Import Namespace="Practica.Model" %>
 
 <!DOCTYPE html>
@@ -36,7 +36,7 @@
             text-align: left;
         }
 
-        /* Encabezado de la tarjeta */
+        /* --- NUEVO: Encabezado de la tarjeta --- */
         .card-header {
             display: flex;
             justify-content: space-between;
@@ -49,7 +49,7 @@
             font-size: 32px;
         }
         
-        /* ESTILOS PARA LA LISTA DE ACTIVIDADES */
+        /* --- ESTILOS PARA LA LISTA DE ACTIVIDADES --- */
         .activity-list { list-style: none; }
         .activity-item {
             padding: 15px 0;
@@ -82,17 +82,9 @@
         .btn-profile:hover { background-color: rgba(255, 255, 255, 0.3); }
         .btn-logout { background-color: #dc3545; }
         .btn-logout:hover { background-color: #c82333; }
+        /* --- NUEVO: Estilo para el botón de añadir --- */
         .btn-primary { background-color: #667eea; }
         .btn-primary:hover { background-color: #5a67d8; }
-
-        /* --- NUEVO: Estilos para el botón de editar --- */
-        .activity-actions {
-            margin-top: 15px;
-            text-align: right; /* Alinea el botón a la derecha */
-        }
-        .btn-edit { background-color: #17a2b8; } /* Color azul verdoso */
-        .btn-edit:hover { background-color: #138496; }
-        
     </style>
 </head>
 <body>
@@ -128,15 +120,7 @@
                             <p class="activity-notes" runat="server" visible='<%# !string.IsNullOrEmpty(Eval("Notes") as string) %>'>
                                 <strong>Notas:</strong> <%# Eval("Notes") %>
                             </p>
-                            
-                            <div class="activity-actions">
-                                <asp:Button ID="btnEdit" runat="server" 
-                                    Text="Editar" 
-                                    CssClass="btn btn-edit" 
-                                    OnClick="btnEdit_Click"
-                                    CommandArgument='<%# Eval("Id") %>' />
-                            </div>
-                            </li>
+                        </li>
                     </ItemTemplate>
                     <FooterTemplate>
                         </ul>

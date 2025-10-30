@@ -7,9 +7,6 @@ using Practica.Model;
 
 namespace Practica.Model {
     public class ActivityGym : Activity {
-        public string BodyPart { get; set; }
-        public int Calories { get; set; }
-
         private string bodyPart;
         private int calories;
 

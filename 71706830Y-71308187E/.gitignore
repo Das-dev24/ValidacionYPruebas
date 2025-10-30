@@ -1,0 +1,29 @@
+# Dependencias de gestores de paquetes
+## NuGet
+packages/
+PracticaTests/
+
+# Ficheros específicos de Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ficheros de compilación y salida
+**/[Bb]in/
+**/[Oo]bj/
+
+# Ficheros generados por herramientas de test
+*.Test.dll
+*.testsettings
+TestResult.xml
+*.DotSettings.user
+
+# Ficheros de caché y registros
+*.log
+*.tlog
+
+# Otros
+*.pdb
+*.orig

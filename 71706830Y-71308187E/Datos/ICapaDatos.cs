@@ -42,7 +42,5 @@ namespace Database {
         bool GuardaActivity(Activity e);
 
         void Register(string name, string lastName, string email, string password, bool isSuperUser = false);
-
-        Activity GetActivityById(int activityId);
     }
 }

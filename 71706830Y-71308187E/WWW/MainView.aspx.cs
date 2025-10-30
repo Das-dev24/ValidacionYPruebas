@@ -77,13 +77,5 @@ namespace WWW {
             // Redirige al usuario a la página del formulario para crear una nueva actividad
             Response.Redirect("AddActivity.aspx");
         }
-
-        protected void btnEdit_Click(object sender, EventArgs e) {
-            Button btn = (Button)sender;
-            string activityId = btn.CommandArgument;
-
-            // Redirige a la página de edición con el ID de la actividad
-            Response.Redirect($"EditActivity.aspx?id={activityId}");
-        }
     }
 }

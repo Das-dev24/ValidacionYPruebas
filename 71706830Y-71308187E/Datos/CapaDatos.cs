@@ -104,14 +104,9 @@ namespace Datos {
             if (Activities.Contains(e)) {
                 return false;
             } else {
-                e.Id = (Activities.Count + 1);
                 Activities.Add(e);
                 return true;
             }
-        }
-
-        public Activity GetActivityById(int activityId) {
-            return Activities.FirstOrDefault(a => a.Id == activityId);
         }
     }
 }
