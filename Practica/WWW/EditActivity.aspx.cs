@@ -1,4 +1,4 @@
-﻿using Datos; // Asegúrate de que este 'using' esté presente
+﻿using Datos; 
 using Practica.Model;
 using System;
 using System.Linq;
@@ -6,8 +6,7 @@ using System.Web.UI;
 
 namespace WWW {
     public partial class EditActivity : System.Web.UI.Page {
-        // 1. Replicamos la forma en que accedes a tu CapaDatos desde Application
-        private CapaDatos Data {
+                private CapaDatos Data {
             get {
                 CapaDatos data = (CapaDatos)Application["datos"];
                 if (data == null) {
@@ -20,7 +19,6 @@ namespace WWW {
 
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
-                // El Page_Load ahora es muy simple, igual que en EditUser
                 LoadActivityData();
             }
         }
@@ -29,16 +27,12 @@ namespace WWW {
             string activityIdString = Request.QueryString["id"];
             int activityId;
 
-            // 2. Misma lógica para obtener y validar el ID desde la URL
             if (!string.IsNullOrEmpty(activityIdString) && int.TryParse(activityIdString, out activityId)) {
-                // 3. Usamos el NUEVO método que añadimos a CapaDatos
                 Activity activityToEdit = Data.GetActivityById(activityId);
 
                 if (activityToEdit != null) {
-                    // Si se encuentra, llenamos el formulario
                     PopulateForm(activityToEdit);
                 } else {
-                    // Si no, redirigimos a la lista principal
                     Response.Redirect("MainView.aspx");
                 }
             } else {
@@ -46,25 +40,20 @@ namespace WWW {
             }
         }
 
-        // 4. Método para rellenar el formulario (como tu 'PopulateForm' en EditUser)
         private void PopulateForm(Activity activity) {
-            // Guardamos el ID en el campo oculto para usarlo al guardar
             hdnActivityId.Value = activity.Id.ToString();
 
-            // Rellenamos los campos comunes
             txtName.Text = activity.Name;
             txtStartTime.Text = activity.StartTime.ToString("yyyy-MM-ddTHH:mm");
             txtDuration.Text = activity.Duration.ToString();
             txtNotes.Text = activity.Notes;
             ddlActivityType.SelectedValue = activity.TypeActivity;
 
-            // Ocultamos todos los paneles
             pnlRunningCycling.Visible = false;
             pnlSwimming.Visible = false;
             pnlGym.Visible = false;
             pnlOther.Visible = false;
 
-            // Mostramos y rellenamos el panel específico para el tipo de actividad
             if (activity is ActivityRunning runningActivity) {
                 pnlRunningCycling.Visible = true;
                 txtDistance.Text = runningActivity.Distance.ToString();
@@ -90,20 +79,17 @@ namespace WWW {
             }
         }
 
-        // 5. El método para guardar, calcado de tu btnSaveChanges_Click
         protected void btnSave_Click(object sender, EventArgs e) {
             if (Page.IsValid) {
                 int activityId = int.Parse(hdnActivityId.Value);
                 Activity activityToUpdate = Data.GetActivityById(activityId);
 
                 if (activityToUpdate != null) {
-                    // Actualizamos los datos comunes
                     activityToUpdate.Name = txtName.Text;
                     activityToUpdate.StartTime = DateTime.Parse(txtStartTime.Text);
                     activityToUpdate.Duration = int.Parse(txtDuration.Text);
                     activityToUpdate.Notes = txtNotes.Text;
 
-                    // Actualizamos los datos específicos
                     if (activityToUpdate is ActivityRunning runningActivity) {
                         runningActivity.Distance = float.Parse(txtDistance.Text);
                         runningActivity.Slope = int.Parse(txtSlope.Text);
@@ -123,7 +109,6 @@ namespace WWW {
                         otherActivity.Place = txtOtherPlace.Text;
                     }
 
-                    // Redirigimos a la vista principal
                     Response.Redirect("MainView.aspx");
                 }
             }

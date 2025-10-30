@@ -67,7 +67,6 @@ namespace WWW {
                     userToUpdate.Is_superuser = chkIsSuperuser.Checked;
                     userToUpdate.State = (UserState)Enum.Parse(typeof(UserState), ddlState.SelectedValue);
 
-                    //Data.UpdateUser(userToUpdate);
 
                     ShowMessage("¡Usuario actualizado correctamente!", isError: false);
                     Response.AppendHeader("Refresh", "2;url=AdminUsers.aspx");
@@ -77,7 +76,6 @@ namespace WWW {
             }
         }
 
-        // --- NUEVA FUNCIÓN ---
         protected void btnResetPassword_Click(object sender, EventArgs e) {
             try {
                 if (string.IsNullOrEmpty(txtNewPassword.Text)) {
@@ -94,10 +92,8 @@ namespace WWW {
                 User userToUpdate = Data.LeeUserPorId(userId);
 
                 if (userToUpdate != null) {
-                    // Al asignar al campo 'Password', el 'set' se encarga de encriptarlo
                     userToUpdate.Password = txtNewPassword.Text;
 
-                    //Data.UpdateUser(userToUpdate);
 
                     ShowMessage("¡Contraseña del usuario restablecida con éxito!", isError: false);
                     txtNewPassword.Text = string.Empty; // Limpia el campo

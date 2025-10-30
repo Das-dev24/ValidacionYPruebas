@@ -6,7 +6,6 @@
     <title>Añadir Nuevo Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-        /* (Se pueden usar los mismos estilos del formulario de 'AddActivity') */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body, form { height: 100%; }
         body {

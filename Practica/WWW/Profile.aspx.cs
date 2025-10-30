@@ -9,7 +9,7 @@ namespace WWW {
             if (!IsPostBack) {
                 LoadUserProfile();
             }
-            // Asegurarse de que los mensajes estén ocultos al cargar la página si no hay postback
+            // Asegurarse de que los mensajes estén ocultos al cargar la página
             lblMessage.Visible = false;
             lblPasswordMessage.Visible = false;
         }

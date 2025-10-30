@@ -15,7 +15,6 @@
             color: #333;
         }
         
-        /* Barra de Navegación */
         .main-header {
             background-color: rgba(0, 0, 0, 0.2); padding: 15px 40px;
             display: flex; justify-content: space-between; align-items: center;
@@ -24,7 +23,6 @@
         .user-info .user-name { font-size: 18px; font-weight: 600; }
         .user-nav { display: flex; align-items: center; gap: 15px; }
 
-        /* Contenedor Principal */
         .main-container {
             display: flex; justify-content: center; align-items: flex-start;
             padding: 40px; overflow-y: auto;
@@ -36,7 +34,6 @@
             text-align: left;
         }
 
-        /* Encabezado de la tarjeta */
         .card-header {
             display: flex;
             justify-content: space-between;
@@ -49,7 +46,6 @@
             font-size: 32px;
         }
         
-        /* ESTILOS PARA LA LISTA DE ACTIVIDADES */
         .activity-list { list-style: none; }
         .activity-item {
             padding: 15px 0;
@@ -75,7 +71,6 @@
         }
         .no-activities-panel p { font-size: 18px; color: #666; text-align: center; padding: 40px 0; }
         
-        /* Estilos de Botones */
         .btn { padding: 10px 20px; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none; color: white !important; }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .btn-profile { background-color: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); }
@@ -85,12 +80,11 @@
         .btn-primary { background-color: #667eea; }
         .btn-primary:hover { background-color: #5a67d8; }
 
-        /* --- NUEVO: Estilos para el botón de editar --- */
         .activity-actions {
             margin-top: 15px;
-            text-align: right; /* Alinea el botón a la derecha */
+            text-align: right; 
         }
-        .btn-edit { background-color: #17a2b8; } /* Color azul verdoso */
+        .btn-edit { background-color: #17a2b8; }
         .btn-edit:hover { background-color: #138496; }
         
     </style>

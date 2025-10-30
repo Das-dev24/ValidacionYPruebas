@@ -31,41 +31,37 @@
         }
         .admin-header h2 { color: #333; font-size: 28px; }
         .add-button-container {
-            text-align: left; /* Alineamos el botón de añadir a la derecha */
+            text-align: left;
             margin-bottom: 20px;
         }
         .user-list { list-style: none; padding: 0; }
         
-        /* --- AJUSTE 1 --- */
         .user-list-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 15px 10px;
             border-bottom: 1px solid #f0f0f0;
-            gap: 15px; /* Añadimos un espacio mínimo entre elementos */
+            gap: 15px; 
         }
 
         .user-list-item:last-child { border-bottom: none; }
         
-        /* --- AJUSTE 2 --- */
         .user-info {
             flex-grow: 1;
-            min-width: 0; /* Permite que este contenedor se encoja correctamente */
+            min-width: 0;
         }
 
         .user-name { font-size: 16px; font-weight: 600; color: #333; }
         
-        /* --- AJUSTE 3 --- */
         .user-email {
             font-size: 14px;
             color: #777;
-            overflow-wrap: break-word; /* Permite que el texto largo se divida */
+            overflow-wrap: break-word; 
         }
-        
-        /* --- AJUSTE 4 --- */
+
         .user-actions {
-            flex-shrink: 0; /* Evita que el contenedor de los botones se encoja */
+            flex-shrink: 0;
         }
 
         .user-actions a {

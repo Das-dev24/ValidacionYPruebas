@@ -22,8 +22,6 @@
             align-items: center;
             padding: 20px;
         }
-
-        /* --- Estilos para la tarjeta principal del perfil --- */
         .profile-card {
             background: white;
             padding: 30px;
@@ -35,9 +33,9 @@
 
         .profile-header {
             text-align: center;
-            margin-bottom: 20px; /* Reducido de 30px */
+            margin-bottom: 20px;
             border-bottom: 1px solid #eee;
-            padding-bottom: 15px; /* Reducido de 20px */
+            padding-bottom: 15px;
         }
 
         .profile-header h2 {
@@ -49,17 +47,16 @@
             color: #444;
             font-size: 20px;
             font-weight: 600;
-            margin-top: 25px; /* Reducido de 30px */
+            margin-top: 25px;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 1px solid #eee;
         }
 
-        /* --- Estilos para la sección de información --- */
         .info-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0; /* Reducido de 12px */
+            padding: 8px 0; 
             font-size: 15px;
             border-bottom: 1px solid #f0f0f0;
         }
@@ -67,14 +64,13 @@
         .info-row strong { color: #555; }
         .info-row span { color: #333; }
 
-        /* --- Estilos para los formularios --- */
         .form-group {
-            margin-bottom: 15px; /* Reducido de 20px */
+            margin-bottom: 15px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 6px; /* Reducido de 8px */
+            margin-bottom: 6px;
             color: #333;
             font-weight: 500;
             font-size: 14px;
@@ -83,7 +79,7 @@
         .form-group input[type="text"],
         .form-group input[type="password"] {
             width: 100%;
-            padding: 10px 12px; /* Reducido de 12px 15px */
+            padding: 10px 12px;
             border: 2px solid #e0e0e0;
             border-radius: 6px;
             font-size: 14px;
@@ -96,17 +92,16 @@
             border-color: #667eea;
         }
 
-        /* --- Estilos para los botones --- */
         .btn {
             width: 100%;
-            padding: 12px; /* Reducido de 14px */
+            padding: 12px;
             border: none;
             border-radius: 6px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 5px; /* Reducido de 10px */
+            margin-top: 5px;
         }
 
         .btn:hover { transform: translateY(-2px); }
@@ -123,7 +118,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- Mensajes flotantes (esquina superior derecha) --- */
         .message-container {
             position: fixed;
             top: 20px;
@@ -143,10 +137,9 @@
         .alert-success { background-color: #28a745; }
         .alert-danger { background-color: #dc3545; }
 
-        /* --- Enlace del footer --- */
         .footer-link {
             text-align: center;
-            margin-top: 25px; /* Reducido de 30px */
+            margin-top: 25px; 
         }
 
         .footer-link a {

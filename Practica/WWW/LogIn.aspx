@@ -74,8 +74,6 @@
             border-color: #667eea;
         }
         
-        /* --- ESTILOS AÑADIDOS/MODIFICADOS --- */
-        /* Mensajes flotantes (esquina superior derecha) */
         .message-container {
             position: fixed;
             top: 20px;
@@ -92,7 +90,6 @@
         }
 
         .alert-danger { background-color: #dc3545; }
-        /* Se eliminó el antiguo estilo .error-message */
         
         .btn-login {
             width: 100%;
