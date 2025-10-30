@@ -39,10 +39,14 @@ namespace Database {
         /// </summary>
         /// <param name="e">Objeto de la clase Activity que se quiere almacenar.</param>
         /// <returns>Verdadero o falso en función de si ha conseguido insertar/ actualizar la información.</returns>
+
+        // Guarda una actividad en la base de datos.
         bool GuardaActivity(Activity e);
 
+        // Registra un nuevo usuario en el sistema.
         void Register(string name, string lastName, string email, string password, bool isSuperUser = false);
 
+        // Obtiene una actividad específica a través de su ID.
         Activity GetActivityById(int activityId);
     }
 }
