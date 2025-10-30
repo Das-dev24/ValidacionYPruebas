@@ -67,3 +67,5 @@ namespace Practica.Model {
             // Devuelve el resultado como texto, formateado a dos decimales.
             return rythm.ToString("0.00");
         }
+    }
+}

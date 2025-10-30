@@ -44,7 +44,7 @@ namespace Practica.Model.Tests {
             var activity = new ActivityRunning(testUser, testName, "", testDate, 60, "", "Parque", 0f, 150);
             // Usando el método de utilidad AssertThrows
             var ex = AssertThrows<DivideByZeroException>(() => activity.Rythm());
-            Assert.AreEqual("La distancia no puede ser cero al calcular la velocidad.", ex.Message);
+            Assert.AreEqual("La distancia no puede ser cero al calcular el ritmo.", ex.Message);
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace Practica.Model.Tests {
             var activity = new ActivityRunning(testUser, testName, "", testDate, 60, "", "Parque", 0f, 150);
             // Usando el método de utilidad AssertThrows
             var ex = AssertThrows<DivideByZeroException>(() => activity.ObtainActivity());
-            Assert.AreEqual("La distancia no puede ser cero al calcular la velocidad.", ex.Message);
+            Assert.AreEqual("La distancia no puede ser cero al calcular el ritmo.", ex.Message);
         }
 
         #endregion
